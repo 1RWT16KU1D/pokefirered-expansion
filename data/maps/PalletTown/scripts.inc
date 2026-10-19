@@ -447,3 +447,7 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	call PalletTown_EventScript_SignLadyShowSign
 	release
 	end
+
+PalletTown_EventScript_BrunoGreet::
+	msgbox PalletTown_Text_BrunoSaysHi, MSGBOX_NPC
+	end

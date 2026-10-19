@@ -65,3 +65,6 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "Good for you, good for you.\n"
     .string "Hohoho.$"
 
+PalletTown_Text_BrunoSaysHi::
+    .string "{COLOR}{DARK_GRAY}Bruno:{COLOR}{BLUE} Hoho! It's good to\n"
+    .string "see you, {PLAYER}!$"
