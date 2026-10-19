@@ -14384,3 +14384,28 @@ AI: Basic Trainer
 Beldum
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_PATTON ===
+Name: Patton
+Class: Developer
+Pic: Pyramid King Brandon
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Check Bad Move / Try To Faint / Check Viability
+Items: Tera Orb / Full Restore / None / None
+
+Drapion @Razor Claw
+Level: 40
+IVs: 31 HP / 31 Atk / 31 Def / 0 SpA / 31 SpD / 31 Spe
+EVs: 128 HP / 252 Atk / 128 Spe
+Ability: Sniper
+Shiny: Yes
+Ball: Dusk
+Nature: Jolly
+Tera Type: Steel
+- Night Slash
+- Cross Poison
+- Toxic
+- Acupressure

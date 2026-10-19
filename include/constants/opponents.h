@@ -671,6 +671,7 @@ enum TrainerID
     TRAINER_NOLAND,
     TRAINER_LUCY,
     TRAINER_BRANDON,
+    TRAINER_PATTON,
     TRAINERS_COUNT,
 
     // Special Trainer Ids.

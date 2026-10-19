@@ -410,6 +410,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_FACTORY_HEAD]        = { _("FACTORY HEAD") },
     [TRAINER_CLASS_PIKE_QUEEN]          = { _("PIKE QUEEN") },
     [TRAINER_CLASS_PYRAMID_KING]        = { _("PYRAMID KING") },
+    [TRAINER_CLASS_DEVELOPER]           = { _("Developer"), 25, BALL_DUSK},
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

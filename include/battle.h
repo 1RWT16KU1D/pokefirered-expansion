@@ -444,6 +444,16 @@ struct DynamaxData
     u16 lastUsedBaseMove;
 };
 
+struct SabotageData
+{
+    // Max of 3
+    u8 passiveTrapCtr:4;
+    u8 activeTrapCtr:4;
+
+    u8 passiveTrapId;
+    u8 activeTrapId;
+};
+
 struct BattleGimmickData
 {
     u8 usableGimmick[MAX_BATTLERS_COUNT];                // first usable gimmick that can be selected for each battler
@@ -635,6 +645,7 @@ struct BattleStruct
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][NUM_BATTLE_SIDES];    // two per battler
     struct ZMoveData zmove;
     struct DynamaxData dynamax;
+    struct SabotageData sabotage;
     struct BattleGimmickData gimmick;
     const u8 *trainerSlideMsg;
     u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages

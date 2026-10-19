@@ -449,5 +449,12 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	end
 
 PalletTown_EventScript_BrunoGreet::
+	lock
+	faceplayer
+	giveitem ITEM_MEGA_RING 1
+	setflag FLAG_BADGE08_GET
+	givemon SPECIES_SALAMENCE 50 ITEM_SALAMENCITE
+	trainerbattle_single TRAINER_PATTON, PalletTown_Text_BrunoSaysHi, PalletTown_Text_BrunoSaysHi
 	msgbox PalletTown_Text_BrunoSaysHi, MSGBOX_NPC
+	release
 	end
