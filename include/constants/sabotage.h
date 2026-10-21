@@ -18,9 +18,9 @@
       They are only announced when they are activated. They last for 3 turns, except when their
       effect ends, then the next turn a new trap is set.
 
-      Examples: No Interference (Using an item cancels the effect and ends the turn),
+      Examples: Blood Pact (KOing and opponent loses you half your max HP),
       Shattered Dreams (If the trainer attempts to Mega Evolve, use a Z-Move, Dynamax
-      or Terastallize, and other gimmicks, the action fails and the turn ends),
+      or Terastallize, and other gimmicks, or use an item the action fails and the turn ends),
       Jackpot! (50% for the trap to pop-up and guarantee a crit)
 */
 
@@ -41,14 +41,14 @@ enum SabotageTraps
     SABOTAGE_TRAP_TRAPPERS_TERRITORY = 1, // All Pokémon cannot switch out
     SABOTAGE_TRAP_GRAVEYARD, // All Pokémon gain Ghost-type (can have up to 3 types)
     SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended
-    SABOTAGE_TRAP_BIZZARE_TEMPLE,  // 50% chance to switch moves with opponent
+    SABOTAGE_TRAP_INTERTWINED_WILL,  // 50% chance to switch moves with opponent
     SABOTAGE_TRAP_DISTORTED_FURY, // Physical moves become Special and vice-versa
 
     SABOTAGE_TRAP_PASSIVE_COUNT,
 
     // Active Traps
-    SABOTAGE_TRAP_NO_INTERFERENCE = SABOTAGE_TRAP_PASSIVE_COUNT, // Using an item cancels the effect and ends the turn
-    SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera fail and turn ends
+    SABOTAGE_TRAP_BLOOD_PACT = SABOTAGE_TRAP_PASSIVE_COUNT, // KOing an opponent loses you half your Max HP
+    SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera or item use fail and turn ends
     SABOTAGE_TRAP_JACKPOT, // 75% chance to guarantee a critical hit
     SABOTAGE_TRAP_DETONATION_DELUSION, // 33% chance for any move to become Explosion
     SABOTAGE_TRAP_NOTHING_SPECIAL, // Normal-type moves become a random type
@@ -71,10 +71,10 @@ extern struct TrapData gTrapData[SABOTAGE_TRAP_TOTAL_COUNT];
 extern u8 sText_Name_TrappersTerritory[];
 extern u8 sText_Name_Graveyard[];
 extern u8 sText_Name_WrongIntuition[];
-extern u8 sText_Name_BizzareTemple[];
+extern u8 sText_Name_IntertwinedWill[];
 extern u8 sText_Name_DistortedFury[];
 
-extern u8 sText_Name_NoInterference[];
+extern u8 sText_Name_BloodPact[];
 extern u8 sText_Name_ShatteredDreams[];
 extern u8 sText_Name_Jackpot[];
 extern u8 sText_Name_DetonationDelusion[];
@@ -84,10 +84,10 @@ extern u8 sText_Name_NothingSpecial[];
 extern u8 sText_Desc_TrappersTerritory[];
 extern u8 sText_Desc_Graveyard[];
 extern u8 sText_Desc_WrongIntuition[];
-extern u8 sText_Desc_BizzareTemple[];
+extern u8 sText_Desc_IntertwinedWill[];
 extern u8 sText_Desc_DistortedFury[];
 
-extern u8 sText_Desc_NoInterference[];
+extern u8 sText_Desc_BloodPact[];
 extern u8 sText_Desc_ShatteredDreams[];
 extern u8 sText_Desc_Jackpot[];
 extern u8 sText_Desc_DetonationDelusion[];

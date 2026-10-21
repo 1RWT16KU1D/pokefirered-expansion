@@ -17,9 +17,9 @@ const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
     sText_Name_TrappersTerritory,
     sText_Name_Graveyard,
     sText_Name_WrongIntuition,
-    sText_Name_BizzareTemple,
+    sText_Name_IntertwinedWill,
     sText_Name_DistortedFury,
-    sText_Name_NoInterference,
+    sText_Name_BloodPact,
     sText_Name_ShatteredDreams,
     sText_Name_Jackpot,
     sText_Name_DetonationDelusion,
@@ -28,7 +28,7 @@ const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
 
 u8 GetRandomTrap(bool8 isActive)
 {
-    u8 start = isActive ? SABOTAGE_TRAP_NO_INTERFERENCE : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
+    u8 start = isActive ? SABOTAGE_TRAP_BLOOD_PACT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
     u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_WRONG_INTUITION + 1; // For Debugging
 
     u8 trapId;

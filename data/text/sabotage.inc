@@ -7,14 +7,14 @@ sText_Name_Graveyard::
 sText_Name_WrongIntuition::
     .string "Wrong Intuition$"
 
-sText_Name_BizzareTemple::
-    .string "Bizzare Temple$"
+sText_Name_IntertwinedWill::
+    .string "Intertwined Will$"
 
 sText_Name_DistortedFury::
     .string "Distorted Fury$"
 
-sText_Name_NoInterference::
-    .string "No Interference$"
+sText_Name_BloodPact::
+    .string "Blood Pact$"
 
 sText_Name_ShatteredDreams::
     .string "Shattered Dreams$"
