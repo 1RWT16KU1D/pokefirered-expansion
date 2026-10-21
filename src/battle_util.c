@@ -4878,10 +4878,6 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
         case SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET:
             switch (trapId)
             {
-                case SABOTAGE_TRAP_TRAPPERS_TERRITORY:
-                    // Implemented in a later pass.
-                    break;
-
                 case SABOTAGE_TRAP_GRAVEYARD:
                     gBattleStruct->sabotage.originalThirdType[battler] = gBattleMons[battler].types[2];
                     if (gBattleMons[battler].types[0] != TYPE_GHOST
@@ -5109,6 +5105,8 @@ bool32 CanBattlerEscape(enum BattlerId battler) // no ability check
     else if (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
         return FALSE;
     else if (gBattleMons[battler].volatiles.semiInvulnerable == STATE_SKY_DROP)
+        return FALSE;
+    else if (IsSabotageBattle() && (GetCurrentPassiveTrap() == SABOTAGE_TRAP_TRAPPERS_TERRITORY))
         return FALSE;
     else
         return TRUE;
