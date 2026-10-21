@@ -6,13 +6,29 @@
 #include "constants/items.h"
 #include "constants/species.h"
 
+// Flavor Text Tables
+const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
+{
+    0,
+    sText_Name_TrappersTerritory,
+    sText_Name_Graveyard,
+    sText_Name_WrongIntuition,
+    sText_Name_BizzareTemple,
+    sText_Name_DistortedFury,
+    sText_Name_NoInterference,
+    sText_Name_ShatteredDreams,
+    sText_Name_Jackpot,
+    sText_Name_DetonationDelusion,
+    sText_Name_NothingSpecial
+};
+
 u8 GetRandomTrap(bool8 isActive)
 {
     // u8 start = isActive ? SABOTAGE_TRAP_PASSIVE_COUNT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
     // u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_PASSIVE_COUNT;
 
     u8 start = isActive ? SABOTAGE_TRAP_PASSIVE_COUNT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
-    u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_WRONG_INTUITION;
+    u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_PASSIVE_COUNT;
 
     u8 trapId;
 
@@ -35,6 +51,8 @@ void SetRandomPassiveTrap(void)
 
 const u8 *GetTrapName(u8 trapId)
 {
+    if (!IsValidTrapId(trapId))
+        return COMPOUND_STRING("");
     return sSabotageTraps_NameTable[trapId];
 }
 

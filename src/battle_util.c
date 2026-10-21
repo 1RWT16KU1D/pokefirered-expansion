@@ -4870,56 +4870,45 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
 {
     bool32 effect = FALSE;
 
+    if (!IsSabotageBattle() || !IsValidTrapId(trapId))
+        return FALSE;
+
     switch (caseId)
     {
         case SABOTAGE_EFFECT_ON_BATTLE_START:
             switch (trapId)
             {
                 case SABOTAGE_TRAP_TRAPPERS_TERRITORY:
-                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
-                    effect ^= TRUE;
+                    // Implemented in a later pass.
                     break;
 
                 case SABOTAGE_TRAP_GRAVEYARD:
-                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
-                    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
-                        gBattleMons[i].types[2] = TYPE_GHOST;
-                    
-                    effect ^= TRUE;
+                    for (u32 i = 0; i < gBattlersCount; i++)
+                    {
+                        gBattleStruct->sabotage.originalThirdType[i] = gBattleMons[i].types[2];
+                        if (gBattleMons[i].types[0] != TYPE_GHOST && gBattleMons[i].types[1] != TYPE_GHOST && gBattleMons[i].types[2] == TYPE_NONE)
+                            gBattleMons[i].types[2] = TYPE_GHOST;
+                    }
+                    effect = TRUE;
                     break;
-
-                case SABOTAGE_TRAP_WRONG_INTUITION:
-                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
-                    effect ^= TRUE;
-                    break;
-
-                case SABOTAGE_TRAP_BIZZARE_TEMPLE:
-                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
-                    effect ^= TRUE;
-                    break;
-
-                case SABOTAGE_TRAP_DISTORTED_FURY:
-                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
-                    effect ^= TRUE;
-                    break;
-
                 default:
                     break;
             }
+            break;
 
-        case SABOTAGE_EFFECT_ON_SWITCHIN: ;
-            enum BattlerId battler = gBattleScripting.battler;
+        case SABOTAGE_EFFECT_ON_SWITCHIN:
             switch (trapId)
             {
                 case SABOTAGE_TRAP_GRAVEYARD:
-                    gBattleMons[battler].types[2] = TYPE_GHOST;
-                    effect ^= TRUE;
+                    gBattleStruct->sabotage.originalThirdType[battler] = gBattleMons[battler].types[2];
+                    if (gBattleMons[battler].types[0] != TYPE_GHOST && gBattleMons[battler].types[1] != TYPE_GHOST && gBattleMons[battler].types[2] == TYPE_NONE)
+                        gBattleMons[battler].types[2] = TYPE_GHOST;
+                    effect = TRUE;
                     break;
-
                 default:
                     break;
             }
-
+            break;
         default:
             break;
     }

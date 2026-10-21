@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_sabotage.h"
 #include "battle_z_move.h"
 #include "graphics.h"
 #include "sprite.h"
@@ -2626,9 +2627,63 @@ void UpdateAbilityPopup(enum BattlerId battler)
     PrintAbilityOnAbilityPopUp(ability, spriteIds[0], spriteIds[1]);
 }
 
-void CreateSabotagePopUp(bool32 isDoubleBattle)
+void CreateSabotageTrapPopUp(enum SabotageTraps trapId, bool8 isActiveTrap)
 {
+    enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    u8 *spriteIds;
+    u32 tileTag = TAG_ABILITY_POP_UP_PLAYER1 + battler;
+    struct SpriteTemplate template = sSpriteTemplate_AbilityPopUp;
+    const s16 (*coords)[2] = IsDoubleBattle() ? sAbilityPopUpCoordsDoubles : sAbilityPopUpCoordsSingles;
+    enum BattlerPosition position = GetBattlerPosition(battler);
+    u32 xSlide = -ABILITY_POP_UP_POS_X_SLIDE;
+    u32 freeSpriteSlots = 0;
 
+    if (!IsValidTrapId(trapId))
+        return;
+
+    if (gBattleStruct->battlerState[battler].activeAbilityPopUps)
+        return;
+    for (u32 i = 0; i < MAX_SPRITES; i++)
+    {
+        if (!gSprites[i].inUse)
+            freeSpriteSlots++;
+    }
+    if (freeSpriteSlots < 2)
+        return;
+
+    if (!IsAnyAbilityPopUpActive())
+        LoadSpritePalette(&sSpritePalette_AbilityPopUp);
+    if (IndexOfSpriteTileTag(tileTag) == 0xFF)
+    {
+        struct SpriteSheet sheet = sSpriteSheet_AbilityPopUp;
+        sheet.tag = tileTag;
+        LoadSpriteSheet(&sheet);
+    }
+
+    template.tileTag = tileTag;
+    spriteIds = gBattleStruct->abilityPopUpSpriteIds[battler];
+    spriteIds[0] = CreateSprite(&template, coords[position][0] + xSlide, coords[position][1], 0);
+    spriteIds[1] = CreateSprite(&template, coords[position][0] + xSlide + ABILITY_POP_UP_POS_X_DIFF, coords[position][1], 0);
+    gSprites[spriteIds[0]].sIsPlayerSide = TRUE;
+    gSprites[spriteIds[1]].sIsPlayerSide = TRUE;
+    gSprites[spriteIds[1]].oam.tileNum += 32;
+    if (!IsAnyAbilityPopUpActive())
+        CreateTask(Task_FreeAbilityPopUpGfx, 5);
+    gBattleStruct->battlerState[battler].activeAbilityPopUps = TRUE;
+    gSprites[spriteIds[0]].sIsMain = TRUE;
+    gSprites[spriteIds[0]].sBattlerId = battler;
+    gSprites[spriteIds[1]].sBattlerId = battler;
+
+    PrintOnAbilityPopUp(isActiveTrap ? COMPOUND_STRING("Active Trap") : COMPOUND_STRING("Passive Trap"),
+                        (void *)(OBJ_VRAM0) + TILE_OFFSET_4BPP(gSprites[spriteIds[0]].oam.tileNum),
+                        (void *)(OBJ_VRAM0) + TILE_OFFSET_4BPP(gSprites[spriteIds[1]].oam.tileNum),
+                        0, 0, ABILITY_POP_UP_BATTLER_BG_TXTCLR, ABILITY_POP_UP_BATTLER_FG_TXTCLR,
+                        ABILITY_POP_UP_BATTLER_SH_TXTCLR, TRUE, battler);
+    PrintOnAbilityPopUp(GetTrapName(trapId),
+                        (void *)(OBJ_VRAM0) + TILE_OFFSET_4BPP(gSprites[spriteIds[0]].oam.tileNum) + TILE_OFFSET_4BPP(8),
+                        (void *)(OBJ_VRAM0) + TILE_OFFSET_4BPP(gSprites[spriteIds[1]].oam.tileNum) + TILE_OFFSET_4BPP(8),
+                        0, 4, ABILITY_POP_UP_ABILITY_BG_TXTCLR, ABILITY_POP_UP_ABILITY_FG_TXTCLR,
+                        ABILITY_POP_UP_ABILITY_SH_TXTCLR, FALSE, battler);
 }
 
 static void SpriteCb_AbilityPopUp(struct Sprite *sprite)

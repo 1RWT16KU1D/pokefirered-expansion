@@ -3326,6 +3326,7 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
     #endif // TESTING
 
     Ai_UpdateSwitchInData(battler);
+    SabotageBattleEffects(SABOTAGE_EFFECT_ON_SWITCHIN, battler, GetCurrentPassiveTrap());
 }
 
 const u8* FaintClearSetData(enum BattlerId battler)
@@ -3921,14 +3922,17 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_SABOTAGE_EFFECTS:
-        gBattleStruct->eventState.beforeFirstTurn++;
         if (IsSabotageBattle())
         {
             ResetPassiveTrapCounter();
             ResetActiveTrapCounter();
             SetRandomPassiveTrap();
             SetRandomActiveTrap();
+
+            CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
+            SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLE_START, 0, GetCurrentPassiveTrap());
         }
+        gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_END:
         for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)

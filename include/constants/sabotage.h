@@ -37,7 +37,7 @@ enum SabotageEffects
 enum SabotageTraps
 {
     // Passive Traps
-    SABOTAGE_TRAP_TRAPPERS_TERRITORY, // All Pokémon cannot switch out
+    SABOTAGE_TRAP_TRAPPERS_TERRITORY = SABOTAGE_TRAP_NONE + 1, // All Pokémon cannot switch out
     SABOTAGE_TRAP_GRAVEYARD, // All Pokémon gain Ghost-type (can have up to 3 types)
     SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended
     SABOTAGE_TRAP_BIZZARE_TEMPLE,  // 50% chance to switch moves with opponent
@@ -92,17 +92,4 @@ extern u8 sText_Desc_Jackpot[];
 extern u8 sText_Desc_DetonationDelusion[];
 extern u8 sText_Desc_NothingSpecial[];
 
-// Flavor Text Tables
-const u8 *sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] = 
-{
-    sText_Name_TrappersTerritory,
-    sText_Name_Graveyard,
-    sText_Name_WrongIntuition,
-    sText_Name_BizzareTemple,
-    sText_Name_DistortedFury,
-    sText_Name_NoInterference,
-    sText_Name_ShatteredDreams,
-    sText_Name_Jackpot,
-    sText_Name_DetonationDelusion,
-    sText_Name_NothingSpecial
-};
+extern const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT];

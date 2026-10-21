@@ -454,6 +454,7 @@ PalletTown_EventScript_BrunoGreet::
 	giveitem ITEM_MEGA_RING 1
 	setflag FLAG_BADGE08_GET
 	givemon SPECIES_SALAMENCE 50 ITEM_SALAMENCITE
+	setflag B_FLAG_SABOTAGE_BATTLE
 	trainerbattle_single TRAINER_PATTON, PalletTown_Text_BrunoSaysHi, PalletTown_Text_BrunoSaysHi
 	msgbox PalletTown_Text_BrunoSaysHi, MSGBOX_NPC
 	release
