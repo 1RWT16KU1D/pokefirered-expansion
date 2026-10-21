@@ -2626,6 +2626,11 @@ void UpdateAbilityPopup(enum BattlerId battler)
     PrintAbilityOnAbilityPopUp(ability, spriteIds[0], spriteIds[1]);
 }
 
+void CreateSabotagePopUp(bool32 isDoubleBattle)
+{
+
+}
+
 static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
 {
     s16 *data = sprite->data;

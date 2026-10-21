@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
+#include "battle_sabotage.h"
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "battle_controllers.h"
@@ -1435,6 +1436,40 @@ static bool32 HandleEndTurnTrainerPartnerSlides(enum BattlerId battler)
     return slide;
 }
 
+static bool32 HandleEndTurnSabotageBattleEffects(enum SabotageTraps trapId)
+{
+    if (!IsSabotageBattle())
+        return FALSE;
+
+    bool32 effect = FALSE;
+
+    if (--gBattleStruct->sabotage.passiveTrapCtr == 0)
+    {
+        switch (trapId)
+        {
+            case SABOTAGE_TRAP_GRAVEYARD:
+                for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
+                    gBattleMons[i].types[2] = TYPE_NONE;
+                effect ^= TRUE;
+                break;
+
+            default:
+                break;
+        }
+
+        ResetPassiveTrapCounter();
+        SetRandomPassiveTrap();
+    }
+
+    if (--gBattleStruct->sabotage.activeTrapCtr == 0)
+    {
+        ResetActiveTrapCounter();
+        SetRandomActiveTrap();
+    }
+
+    return effect;
+}
+
 /*
  * Various end turn effects that happen after all battlers moved.
  * Each Case will apply the effects for each battler. Moving to the next case when all battlers are done.
@@ -1500,6 +1535,7 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
     [ENDTURN_TRAINER_A_SLIDES] = HandleEndTurnTrainerASlides,
     [ENDTURN_TRAINER_B_SLIDES] = HandleEndTurnTrainerBSlides,
     [ENDTURN_TRAINER_PARTNER_SLIDES] = HandleEndTurnTrainerPartnerSlides,
+    [ENDTURN_SABOTAGE] = HandleEndTurnSabotageBattleEffects,
 };
 
 bool32 DoEndTurnEffects(void)

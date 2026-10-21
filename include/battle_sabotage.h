@@ -21,3 +21,4 @@ bool8 IsSabotageBattle(void); // Returns whether the current battle is a Sabotag
 bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum SabotageTraps trapId); // Applies the effects of the given trap ID
 u8 GetCurrentActiveTrap(void); // Returns the current active trap ID
 u8 GetCurrentPassiveTrap(void); // Returns the current passive trap ID
+void SabotageTrapPopUp(enum SabotageTraps trapId, bool8 isActiveTrap);

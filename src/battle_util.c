@@ -7,6 +7,7 @@
 #include "battle_util.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_sabotage.h"
 #include "battle_setup.h"
 #include "battle_z_move.h"
 #include "battle_gimmick.h"
@@ -4860,6 +4861,67 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
     {
         RecordAbilityBattle(battler, gLastUsedAbility);
         gBattlerAbility = battler;
+    }
+
+    return effect;
+}
+
+bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum SabotageTraps trapId)
+{
+    bool32 effect = FALSE;
+
+    switch (caseId)
+    {
+        case SABOTAGE_EFFECT_ON_BATTLE_START:
+            switch (trapId)
+            {
+                case SABOTAGE_TRAP_TRAPPERS_TERRITORY:
+                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
+                    effect ^= TRUE;
+                    break;
+
+                case SABOTAGE_TRAP_GRAVEYARD:
+                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
+                    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
+                        gBattleMons[i].types[2] = TYPE_GHOST;
+                    
+                    effect ^= TRUE;
+                    break;
+
+                case SABOTAGE_TRAP_WRONG_INTUITION:
+                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
+                    effect ^= TRUE;
+                    break;
+
+                case SABOTAGE_TRAP_BIZZARE_TEMPLE:
+                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
+                    effect ^= TRUE;
+                    break;
+
+                case SABOTAGE_TRAP_DISTORTED_FURY:
+                    //SabotageTrapPopUp(trapId, FALSE); // To be modified and implemented
+                    effect ^= TRUE;
+                    break;
+
+                default:
+                    break;
+            }
+
+        case SABOTAGE_EFFECT_ON_SWITCHIN: ;
+            enum BattlerId battler = gBattleScripting.battler;
+            switch (trapId)
+            {
+                case SABOTAGE_TRAP_GRAVEYARD:
+                    gBattleMons[battler].types[2] = TYPE_GHOST;
+                    effect ^= TRUE;
+                    break;
+
+                default:
+                    break;
+            }
+
+        default:
+            break;
     }
 
     return effect;

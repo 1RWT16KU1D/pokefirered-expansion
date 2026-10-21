@@ -11,6 +11,7 @@
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_pyramid.h"
+#include "battle_sabotage.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -3918,6 +3919,16 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
             BattleScriptExecute(BattleScript_TrainerPartnerSlideMsgEnd2);
         gBattleStruct->eventState.beforeFirstTurn++;
+        break;
+    case FIRST_TURN_EVENTS_SABOTAGE_EFFECTS:
+        gBattleStruct->eventState.beforeFirstTurn++;
+        if (IsSabotageBattle())
+        {
+            ResetPassiveTrapCounter();
+            ResetActiveTrapCounter();
+            SetRandomPassiveTrap();
+            SetRandomActiveTrap();
+        }
         break;
     case FIRST_TURN_EVENTS_END:
         for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)

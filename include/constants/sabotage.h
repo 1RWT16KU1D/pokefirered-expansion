@@ -28,7 +28,7 @@
 enum SabotageEffects
 {
     SABOTAGE_EFFECT_ON_SWITCHIN,
-    SABOTAGE_EFFECT_BATTLE_START
+    SABOTAGE_EFFECT_ON_BATTLE_START
 };
 
 #define SABOTAGE_TRAP_NONE 0
@@ -93,7 +93,7 @@ extern u8 sText_Desc_DetonationDelusion[];
 extern u8 sText_Desc_NothingSpecial[];
 
 // Flavor Text Tables
-extern const u8 *sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] = 
+const u8 *sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] = 
 {
     sText_Name_TrappersTerritory,
     sText_Name_Graveyard,
