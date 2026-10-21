@@ -974,9 +974,9 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_TRAINER1MON1AND2COMEBACK]      = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME}, come back!"),
 
     // Sabotage Trap Activation Strings
-    [STRINGID_TRAPPERSTERRITORYACTIVATES]  = COMPOUND_STRING("No Pokémon can escape!"),
+    [STRINGID_TRAPPERSTERRITORYACTIVATES]  = COMPOUND_STRING("Pokémon can no longer escape!"),
     [STRINGID_GRAVEYARDACTIVATES]          = COMPOUND_STRING("All Pokémon gained the\nGhost-type!"),
-    [STRINGID_WRONGINTUITIONACTIVATES]     = COMPOUND_STRING("Pokémon will use the wrong move!"),
+    [STRINGID_WRONGINTUITIONACTIVATES]     = COMPOUND_STRING("Pokémon will use a different\nmove than intended!"),
     [STRINGID_BIZZARETEMPLEACTIVATES]      = COMPOUND_STRING("Pokémon may or may not switch\nmoves with their opponent!"),
     [STRINGID_DISTORTEDFURYACTIVATES]      = COMPOUND_STRING("All Physical and Special moves\nhave switched categories!"),
 };

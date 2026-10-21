@@ -38,7 +38,7 @@ enum SabotageEffects
 enum SabotageTraps
 {
     // Passive Traps
-    SABOTAGE_TRAP_TRAPPERS_TERRITORY = SABOTAGE_TRAP_NONE + 1, // All Pokémon cannot switch out
+    SABOTAGE_TRAP_TRAPPERS_TERRITORY = 1, // All Pokémon cannot switch out
     SABOTAGE_TRAP_GRAVEYARD, // All Pokémon gain Ghost-type (can have up to 3 types)
     SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended
     SABOTAGE_TRAP_BIZZARE_TEMPLE,  // 50% chance to switch moves with opponent

@@ -411,6 +411,29 @@ void HandleAction_UseMove(void)
     }
     else
     {
+        // Add Wrong Intuition Check
+        if (IsSabotageBattle() && (GetCurrentPassiveTrap() == SABOTAGE_TRAP_WRONG_INTUITION))
+        {
+            u8 oldMovePos = gCurrMovePos;
+            u8 movePos;
+            u8 validMovePositions[MAX_MON_MOVES];
+            u8 numValidMoves = 0;
+
+            // Only choose a different move that the battler actually knows
+            for (movePos = 0; movePos < MAX_MON_MOVES; movePos++)
+            {
+                if (movePos != oldMovePos && gBattleMons[gBattlerAttacker].moves[movePos] != MOVE_NONE)
+                    validMovePositions[numValidMoves++] = movePos;
+            }
+
+            // Get new move target. Otherwise self targetting moves could make you damage yourself
+            if (numValidMoves != 0)
+            {
+                gCurrMovePos = validMovePositions[Random() % numValidMoves];
+                gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gBattleMons[gBattlerAttacker].moves[gCurrMovePos], TARGET_NONE);
+            }
+        }
+
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
     }
 
