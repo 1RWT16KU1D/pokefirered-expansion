@@ -4875,7 +4875,7 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
 
     switch (caseId)
     {
-        case SABOTAGE_EFFECT_ON_BATTLE_START:
+        case SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET:
             switch (trapId)
             {
                 case SABOTAGE_TRAP_TRAPPERS_TERRITORY:
@@ -4883,14 +4883,14 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
                     break;
 
                 case SABOTAGE_TRAP_GRAVEYARD:
-                    for (u32 i = 0; i < gBattlersCount; i++)
-                    {
-                        gBattleStruct->sabotage.originalThirdType[i] = gBattleMons[i].types[2];
-                        if (gBattleMons[i].types[0] != TYPE_GHOST && gBattleMons[i].types[1] != TYPE_GHOST && gBattleMons[i].types[2] == TYPE_NONE)
-                            gBattleMons[i].types[2] = TYPE_GHOST;
-                    }
+                    gBattleStruct->sabotage.originalThirdType[battler] = gBattleMons[battler].types[2];
+                    if (gBattleMons[battler].types[0] != TYPE_GHOST
+                    && gBattleMons[battler].types[1] != TYPE_GHOST)
+                        gBattleMons[battler].types[2] = TYPE_GHOST;
+
                     effect = TRUE;
                     break;
+
                 default:
                     break;
             }
@@ -4901,14 +4901,19 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
             {
                 case SABOTAGE_TRAP_GRAVEYARD:
                     gBattleStruct->sabotage.originalThirdType[battler] = gBattleMons[battler].types[2];
-                    if (gBattleMons[battler].types[0] != TYPE_GHOST && gBattleMons[battler].types[1] != TYPE_GHOST && gBattleMons[battler].types[2] == TYPE_NONE)
+
+                    if (gBattleMons[battler].types[0] != TYPE_GHOST
+                    && gBattleMons[battler].types[1] != TYPE_GHOST)
                         gBattleMons[battler].types[2] = TYPE_GHOST;
+
                     effect = TRUE;
                     break;
+
                 default:
                     break;
             }
             break;
+
         default:
             break;
     }

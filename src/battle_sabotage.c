@@ -28,7 +28,7 @@ u8 GetRandomTrap(bool8 isActive)
     // u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_PASSIVE_COUNT;
 
     u8 start = isActive ? SABOTAGE_TRAP_PASSIVE_COUNT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
-    u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_PASSIVE_COUNT;
+    u8 end = isActive ? SABOTAGE_TRAP_TOTAL_COUNT : SABOTAGE_TRAP_WRONG_INTUITION; // For debugging
 
     u8 trapId;
 

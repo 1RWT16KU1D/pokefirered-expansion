@@ -1438,19 +1438,23 @@ static bool32 HandleEndTurnTrainerPartnerSlides(enum BattlerId battler)
 
 static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
 {
-    gBattleStruct->eventState.endTurn++;
+    gBattleStruct->eventState.endTurnBattler++;
 
     if (!IsSabotageBattle())
         return FALSE;
 
+    if (battler != gBattlerByTurnOrder[0])
+        return FALSE;
+
     enum SabotageTraps trapId = GetCurrentPassiveTrap();
 
+    // Do restore effects that a trap may have altered in its duration
     if (gBattleStruct->sabotage.passiveTrapCtr > 0 && --gBattleStruct->sabotage.passiveTrapCtr == 0)
     {
         switch (trapId)
         {
             case SABOTAGE_TRAP_GRAVEYARD:
-                for (u32 i = 0; i < gBattlersCount; i++)
+                for (enum BattlerId i = 0; i < gBattlersCount; i++)
                     gBattleMons[i].types[2] = gBattleStruct->sabotage.originalThirdType[i];
                 break;
 
@@ -1461,7 +1465,8 @@ static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
         SetRandomPassiveTrap();
         ResetPassiveTrapCounter();
         CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
-        SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLE_START, 0, GetCurrentPassiveTrap());
+        for (enum BattlerId i = 0; i < gBattlersCount; i++)
+            SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET, i, GetCurrentPassiveTrap());
     }
 
     if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)

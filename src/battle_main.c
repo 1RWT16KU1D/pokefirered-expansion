@@ -3929,8 +3929,11 @@ static void TryDoEventsBeforeFirstTurn(void)
             SetRandomPassiveTrap();
             SetRandomActiveTrap();
 
-            CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
-            SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLE_START, 0, GetCurrentPassiveTrap());
+            enum SabotageTraps trapId = GetCurrentPassiveTrap();
+
+            CreateSabotageTrapPopUp(trapId, FALSE);
+            for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+                SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET, battler, trapId);
         }
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
