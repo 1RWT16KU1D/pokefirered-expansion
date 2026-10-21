@@ -4914,6 +4914,19 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
             }
             break;
 
+        case SABOTAGE_EFFECT_ON_TRAP_END:
+            switch (trapId)
+            {
+                case SABOTAGE_TRAP_GRAVEYARD:
+                    gBattleMons[battler].types[2] = gBattleStruct->sabotage.originalThirdType[battler];
+                    effect = TRUE;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
         default:
             break;
     }

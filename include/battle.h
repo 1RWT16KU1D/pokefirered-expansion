@@ -453,6 +453,8 @@ struct SabotageData
     u8 passiveTrapId;
     u8 activeTrapId;
     u8 originalThirdType[MAX_BATTLERS_COUNT];
+    u8 previousPassiveTrapId;
+    bool8 passiveTrapEffectPending;
 };
 
 struct BattleGimmickData

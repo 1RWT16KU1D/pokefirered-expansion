@@ -3924,6 +3924,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     case FIRST_TURN_EVENTS_SABOTAGE_EFFECTS:
         if (IsSabotageBattle())
         {
+            gBattleStruct->sabotage.passiveTrapEffectPending = FALSE;
             ResetPassiveTrapCounter();
             ResetActiveTrapCounter();
             SetRandomPassiveTrap();

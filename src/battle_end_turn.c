@@ -1443,36 +1443,33 @@ static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
     if (!IsSabotageBattle())
         return FALSE;
 
-    if (battler != gBattlerByTurnOrder[0])
-        return FALSE;
-
-    enum SabotageTraps trapId = GetCurrentPassiveTrap();
-
-    // Do restore effects that a trap may have altered in its duration
-    if (gBattleStruct->sabotage.passiveTrapCtr > 0 && --gBattleStruct->sabotage.passiveTrapCtr == 0)
+    // Timers belong to the field, so decrement them once at the first battler
+    if (battler == gBattlerByTurnOrder[0])
     {
-        switch (trapId)
+        if (gBattleStruct->sabotage.passiveTrapCtr > 0 && --gBattleStruct->sabotage.passiveTrapCtr == 0)
         {
-            case SABOTAGE_TRAP_GRAVEYARD:
-                for (enum BattlerId i = 0; i < gBattlersCount; i++)
-                    gBattleMons[i].types[2] = gBattleStruct->sabotage.originalThirdType[i];
-                break;
-
-            default:
-                break;
+            gBattleStruct->sabotage.previousPassiveTrapId = GetCurrentPassiveTrap();
+            SetRandomPassiveTrap();
+            ResetPassiveTrapCounter();
+            gBattleStruct->sabotage.passiveTrapEffectPending = TRUE;
+            CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
         }
 
-        SetRandomPassiveTrap();
-        ResetPassiveTrapCounter();
-        CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
-        for (enum BattlerId i = 0; i < gBattlersCount; i++)
-            SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET, i, GetCurrentPassiveTrap());
+        if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)
+        {
+            ResetActiveTrapCounter();
+            SetRandomActiveTrap();
+        }
     }
 
-    if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)
+    // Apply both the previous trap's end effect and current trap's new effects
+    if (gBattleStruct->sabotage.passiveTrapEffectPending)
     {
-        ResetActiveTrapCounter();
-        SetRandomActiveTrap();
+        SabotageBattleEffects(SABOTAGE_EFFECT_ON_TRAP_END, battler, gBattleStruct->sabotage.previousPassiveTrapId);
+        SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET, battler, GetCurrentPassiveTrap());
+
+        if (gBattleStruct->eventState.endTurnBattler == gBattlersCount)
+            gBattleStruct->sabotage.passiveTrapEffectPending = FALSE;
     }
 
     return FALSE;
