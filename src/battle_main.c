@@ -3932,11 +3932,17 @@ static void TryDoEventsBeforeFirstTurn(void)
 
             enum SabotageTraps trapId = GetCurrentPassiveTrap();
 
-            CreateSabotageTrapPopUp(trapId, FALSE);
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
                 SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET, battler, trapId);
+
+            gBattleStruct->eventState.beforeFirstTurn++;
+            if (TryRunSabotageTrapActivationScript(trapId))
+                return;
         }
-        gBattleStruct->eventState.beforeFirstTurn++;
+        else
+        {
+            gBattleStruct->eventState.beforeFirstTurn++;
+        }
         break;
     case FIRST_TURN_EVENTS_END:
         for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)

@@ -301,6 +301,7 @@ extern const u8 gText_Draw[];
 
 extern const u16 gStatUpStringIds[];
 extern const u16 gStatDownStringIds[];
+extern const u16 gSabotageTrapActivationIds[];
 
 extern const u8 gText_BattleTourney[];
 

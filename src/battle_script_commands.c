@@ -17,6 +17,7 @@
 #include "random.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_sabotage.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
@@ -14327,6 +14328,24 @@ void BS_ShowAbilityPopup(void)
     NATIVE_ARGS();
     CreateAbilityPopUp(gBattlerAbility, gBattleMons[gBattlerAbility].ability, IsDoubleBattle());
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ShowSabotageTrapPopup(void)
+{
+    NATIVE_ARGS();
+    CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_WaitForBattleTextAdvance(void)
+{
+    NATIVE_ARGS();
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        gPauseCounterBattle = 0;
+        gBattleCommunication[MSG_DISPLAY] = 0;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 void BS_UpdateAbilityPopup(void)

@@ -1,8 +1,12 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_sabotage.h"
+#include "battle_message.h"
+#include "battle_scripts.h"
+#include "battle_util.h"
 #include "event_data.h"
 
+#include "constants/battle_string_ids.h"
 #include "constants/items.h"
 #include "constants/species.h"
 
@@ -84,6 +88,16 @@ bool8 IsValidTrapId(u8 trapId)
 bool8 IsSabotageBattle(void)
 {
     return FlagGet(B_FLAG_SABOTAGE_BATTLE);
+}
+
+bool32 TryRunSabotageTrapActivationScript(enum SabotageTraps trapId)
+{
+    if (trapId < SABOTAGE_TRAP_TRAPPERS_TERRITORY || trapId >= SABOTAGE_TRAP_PASSIVE_COUNT)
+        return FALSE;
+
+    gBattleCommunication[MULTISTRING_CHOOSER] = trapId - SABOTAGE_TRAP_TRAPPERS_TERRITORY;
+    BattleScriptExecute(BattleScript_SabotageTrapActivation);
+    return TRUE;
 }
 
 u8 GetCurrentActiveTrap(void)

@@ -1438,6 +1438,8 @@ static bool32 HandleEndTurnTrainerPartnerSlides(enum BattlerId battler)
 
 static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
 {
+    bool32 announcePassiveTrap = FALSE;
+
     gBattleStruct->eventState.endTurnBattler++;
 
     if (!IsSabotageBattle())
@@ -1452,7 +1454,6 @@ static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
             SetRandomPassiveTrap();
             ResetPassiveTrapCounter();
             gBattleStruct->sabotage.passiveTrapEffectPending = TRUE;
-            CreateSabotageTrapPopUp(GetCurrentPassiveTrap(), FALSE);
         }
 
         if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)
@@ -1469,8 +1470,16 @@ static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
         SabotageBattleEffects(SABOTAGE_EFFECT_ON_BATTLESTART_AND_TRAP_RESET, battler, GetCurrentPassiveTrap());
 
         if (gBattleStruct->eventState.endTurnBattler == gBattlersCount)
+        {
             gBattleStruct->sabotage.passiveTrapEffectPending = FALSE;
+            announcePassiveTrap = TRUE;
+        }
     }
+
+    // The activation script is field-wide, so run once after all battlers have
+    // had their outgoing and incoming passive effects applied.
+    if (announcePassiveTrap && TryRunSabotageTrapActivationScript(GetCurrentPassiveTrap()))
+        return TRUE;
 
     return FALSE;
 }

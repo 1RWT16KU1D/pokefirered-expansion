@@ -2001,6 +2001,14 @@
 	callnative BS_ShowAbilityPopup
 	.endm
 
+	.macro showsabotagetrappopup
+	callnative BS_ShowSabotageTrapPopup
+	.endm
+
+	.macro waitforbattletextadvance
+	callnative BS_WaitForBattleTextAdvance
+	.endm
+
 	.macro updateabilitypopup
 	callnative BS_UpdateAbilityPopup
 	.endm

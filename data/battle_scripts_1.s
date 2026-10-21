@@ -22,6 +22,13 @@
 
 	.section script_data, "aw", %progbits
 
+BattleScript_SabotageTrapActivation::
+	showsabotagetrappopup
+	pause B_WAIT_TIME_SHORT
+	printfromtable gSabotageTrapActivationIds
+	waitforbattletextadvance
+	end2
+
 BattleScript_TrainerTowerLost::
 	getbattlersforrecall
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_TrainerTowerLostLostSkipMonRecall
