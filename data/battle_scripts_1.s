@@ -35,6 +35,14 @@ BattleScript_SabotageTrapTriggered::
 	pause B_WAIT_TIME_VERY_LONG
 	return
 
+BattleScript_SabotageTrapTriggeredShowTriggerText::
+	showsabotagetrappopupactive
+	pause B_WAIT_TIME_LONG
+
+	printfromtable gSabotageTrapTriggerIds
+	waitforbattletextadvance
+	return
+
 BattleScript_BloodPactActivates::
 	pause B_WAIT_TIME_SHORT
 	showsabotagetrappopupactive
@@ -42,8 +50,8 @@ BattleScript_BloodPactActivates::
 
 	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
 	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
-	printstring STRINGID_BLOODPACTACTIVATES
-	waitmessage B_WAIT_TIME_LONG
+	printfromtable gSabotageTrapTriggerIds
+	waitforbattletextadvance
 
 	tryfaintmon BS_ATTACKER
 	return

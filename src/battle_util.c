@@ -4335,7 +4335,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         // Sabotage Handler
         if (IsSabotageBattle())
         {
-            switch (GetCurrentActiveTrap())
+            enum SabotageTraps activeTrapId = GetCurrentActiveTrap();
+            switch (activeTrapId)
             {
                 case SABOTAGE_TRAP_BLOOD_PACT:
                     if (!IsBattlerUnaffectedByMove(gBattlerTarget)
@@ -4343,6 +4344,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     && IsBattlerAlive(gBattlerAttacker))
                     {
                         SetPassiveDamageAmount(gBattlerAttacker, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
+                        gBattleCommunication[MULTISTRING_CHOOSER] = activeTrapId - SABOTAGE_TRAP_BLOOD_PACT; 
                         BattleScriptCall(BattleScript_BloodPactActivates);
                     }
                     effect++;

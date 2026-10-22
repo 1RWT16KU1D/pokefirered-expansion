@@ -4,6 +4,7 @@
 // Sabotage Battles
 extern const u8 BattleScript_SabotageTrapActivation[];
 extern const u8 BattleScript_SabotageTrapTriggered[];
+extern const u8 BattleScript_SabotageTrapTriggeredShowTriggerText[];
 extern const u8 BattleScript_BloodPactActivates[];
 
 extern const u8 BattleScript_SupersweetSyrupActivates[];

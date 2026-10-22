@@ -11,7 +11,7 @@
       They are announced at the start of their activation turn.
 
       Examples: Graveyard (All Pokemon gain Ghost-type), Trapper's Territory (All Pokemon
-      can't switch out), Bizzare Temple (All Pokemon have a 50% chance to switch moves with
+      can't switch out), Intertwined Will (All Pokemon have a 50% chance to switch moves with
       their opponent)
 
     * Active traps are hidden to the player and have an activation condition.
@@ -38,9 +38,9 @@ enum SabotageEffects
 enum SabotageTraps
 {
     // Passive Traps
-    SABOTAGE_TRAP_TRAPPERS_TERRITORY = 1, // All Pokémon cannot switch out
-    SABOTAGE_TRAP_GRAVEYARD, // All Pokémon gain Ghost-type (can have up to 3 types)
-    SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended
+    SABOTAGE_TRAP_TRAPPERS_TERRITORY = 1, // All Pokémon cannot switch out. DONE.
+    SABOTAGE_TRAP_GRAVEYARD, // All Pokémon gain Ghost-type (can have up to 3 types). DONE.
+    SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended. DONE.
     SABOTAGE_TRAP_INTERTWINED_WILL,  // 50% chance to switch moves with opponent
     SABOTAGE_TRAP_DISTORTED_FURY, // Physical moves become Special and vice-versa
     SABOTAGE_TRAP_BALLROOM_BONANZA, // Pokémon have a 33% chance to use a random Dancing move instead
@@ -48,8 +48,8 @@ enum SabotageTraps
     SABOTAGE_TRAP_PASSIVE_COUNT,
 
     // Active Traps
-    SABOTAGE_TRAP_BLOOD_PACT = SABOTAGE_TRAP_PASSIVE_COUNT, // KOing an opponent loses you half your Max HP
-    SABOTAGE_TRAP_DETONATION_DELUSION, // 25% chance for any move to become Explosion
+    SABOTAGE_TRAP_BLOOD_PACT = SABOTAGE_TRAP_PASSIVE_COUNT, // KOing an opponent loses you half your Max HP. DONE.
+    SABOTAGE_TRAP_DETONATION_DELUSION, // 25% chance for any move to become Explosion. DONE.
     SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera or item use fail and turn ends
     SABOTAGE_TRAP_JACKPOT, // Using a super-effective move results in a crit
     SABOTAGE_TRAP_NOTHING_SPECIAL, // Normal-type moves become a random type
