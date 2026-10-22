@@ -32,7 +32,7 @@ const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
 u8 GetRandomTrap(bool8 isActive)
 {
     u8 start = isActive ? SABOTAGE_TRAP_BLOOD_PACT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
-    u8 end = isActive ? SABOTAGE_TRAP_DETONATION_DELUSION + 1 : SABOTAGE_TRAP_WRONG_INTUITION + 1; // For Debugging
+    u8 end = isActive ? SABOTAGE_TRAP_SHATTERED_DREAMS + 1 : SABOTAGE_TRAP_WRONG_INTUITION + 1; // For Debugging
 
     u8 trapId;
 
@@ -97,6 +97,17 @@ bool32 TryRunSabotageTrapActivationScript(enum SabotageTraps trapId)
 
     gBattleCommunication[MULTISTRING_CHOOSER] = trapId - SABOTAGE_TRAP_TRAPPERS_TERRITORY;
     BattleScriptExecute(BattleScript_SabotageTrapActivation);
+    return TRUE;
+}
+
+bool32 TryRunShatteredDreamsScript(enum BattlerId battler)
+{
+    if (!IsSabotageBattle() || GetCurrentActiveTrap() != SABOTAGE_TRAP_SHATTERED_DREAMS)
+        return FALSE;
+
+    gBattlerAttacker = gBattleScripting.battler = battler;
+    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHATTERED_DREAMS_ACTIVATES;
+    BattleScriptExecute(BattleScript_SabotageTrapActionBlocked);
     return TRUE;
 }
 

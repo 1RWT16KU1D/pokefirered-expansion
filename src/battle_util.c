@@ -587,6 +587,9 @@ void HandleAction_Switch(void)
 void HandleAction_UseItem(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+    if (TryRunShatteredDreamsScript(gBattlerAttacker))
+        return;
+
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearVariousBattlerFlags(gBattlerAttacker);

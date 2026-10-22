@@ -5175,6 +5175,9 @@ static bool32 TryActivateGimmick(enum BattlerId battler)
     {
         gBattlerAttacker = gBattleScripting.battler = battler;
         gBattleStruct->gimmick.toActivate &= ~(1u << battler);
+        if (TryRunShatteredDreamsScript(battler))
+            return TRUE;
+
         if (gGimmicksInfo[gBattleStruct->gimmick.usableGimmick[battler]].ActivateGimmick != NULL)
         {
             gGimmicksInfo[gBattleStruct->gimmick.usableGimmick[battler]].ActivateGimmick(battler);
