@@ -19,11 +19,14 @@ const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
     sText_Name_WrongIntuition,
     sText_Name_IntertwinedWill,
     sText_Name_DistortedFury,
+    sText_Name_BallroomBonanza,
+
     sText_Name_BloodPact,
     sText_Name_ShatteredDreams,
     sText_Name_Jackpot,
     sText_Name_DetonationDelusion,
-    sText_Name_NothingSpecial
+    sText_Name_NothingSpecial,
+    sText_Name_PandorasBox,
 };
 
 u8 GetRandomTrap(bool8 isActive)
@@ -36,6 +39,10 @@ u8 GetRandomTrap(bool8 isActive)
     // Prevent getting the same trap twice in a row
     do trapId = start + (Random() % (end - start));
     while (trapId == GetCurrentActiveTrap() || trapId == GetCurrentPassiveTrap());
+
+    // For debugging
+    if (isActive)
+        return SABOTAGE_TRAP_DETONATION_DELUSION;
 
     return trapId;
 }

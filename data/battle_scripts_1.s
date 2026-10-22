@@ -25,9 +25,15 @@
 BattleScript_SabotageTrapActivation::
 	showsabotagetrappopup
 	pause B_WAIT_TIME_LONG
+
 	printfromtable gSabotageTrapActivationIds
 	waitforbattletextadvance
 	end2
+
+BattleScript_SabotageTrapTriggered::
+	showsabotagetrappopupactive
+	pause B_WAIT_TIME_LONG
+	return
 
 BattleScript_TrainerTowerLost::
 	getbattlersforrecall

@@ -21,7 +21,7 @@
       Examples: Blood Pact (KOing and opponent loses you half your max HP),
       Shattered Dreams (If the trainer attempts to Mega Evolve, use a Z-Move, Dynamax
       or Terastallize, and other gimmicks, or use an item the action fails and the turn ends),
-      Jackpot! (50% for the trap to pop-up and guarantee a crit)
+      Jackpot! (Using a super-effective move results in a crit)
 */
 
 
@@ -50,7 +50,7 @@ enum SabotageTraps
     // Active Traps
     SABOTAGE_TRAP_BLOOD_PACT = SABOTAGE_TRAP_PASSIVE_COUNT, // KOing an opponent loses you half your Max HP
     SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera or item use fail and turn ends
-    SABOTAGE_TRAP_JACKPOT, // 75% chance to guarantee a critical hit
+    SABOTAGE_TRAP_JACKPOT, // Using a super-effective move results in a crit
     SABOTAGE_TRAP_DETONATION_DELUSION, // 25% chance for any move to become Explosion
     SABOTAGE_TRAP_NOTHING_SPECIAL, // Normal-type moves become a random type
     SABOTAGE_TRAP_PANDORAS_BOX, // On using a newly chosen move after switchin, a random weather, terrain and field condition is set
@@ -75,12 +75,14 @@ extern u8 sText_Name_Graveyard[];
 extern u8 sText_Name_WrongIntuition[];
 extern u8 sText_Name_IntertwinedWill[];
 extern u8 sText_Name_DistortedFury[];
+extern u8 sText_Name_BallroomBonanza[];
 
 extern u8 sText_Name_BloodPact[];
 extern u8 sText_Name_ShatteredDreams[];
 extern u8 sText_Name_Jackpot[];
 extern u8 sText_Name_DetonationDelusion[];
 extern u8 sText_Name_NothingSpecial[];
+extern u8 sText_Name_PandorasBox[];
 
 
 extern u8 sText_Desc_TrappersTerritory[];
@@ -88,11 +90,13 @@ extern u8 sText_Desc_Graveyard[];
 extern u8 sText_Desc_WrongIntuition[];
 extern u8 sText_Desc_IntertwinedWill[];
 extern u8 sText_Desc_DistortedFury[];
+extern u8 sText_Desc_BallroomBonanza[];
 
 extern u8 sText_Desc_BloodPact[];
 extern u8 sText_Desc_ShatteredDreams[];
 extern u8 sText_Desc_Jackpot[];
 extern u8 sText_Desc_DetonationDelusion[];
 extern u8 sText_Desc_NothingSpecial[];
+extern u8 sText_Desc_PandorasBox[];
 
 extern const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT];

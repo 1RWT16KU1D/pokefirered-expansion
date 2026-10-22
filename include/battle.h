@@ -452,9 +452,12 @@ struct SabotageData
 
     u8 passiveTrapId;
     u8 activeTrapId;
-    u8 originalThirdType[MAX_BATTLERS_COUNT];
-    u8 previousPassiveTrapId;
+
+    u8 originalThirdType[MAX_BATTLERS_COUNT]; // For Graveyard
+    u8 previousPassiveTrapId; // SABOTAGE_EFFECT_END_TURN
     bool8 passiveTrapEffectPending;
+
+    bool8 activeTrapConditionMet;
 };
 
 struct BattleGimmickData

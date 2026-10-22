@@ -14394,7 +14394,7 @@ Gender: Male
 Music: Male
 Double Battle: No
 AI: Check Bad Move / Try To Faint / Check Viability
-Items: Tera Orb / Full Restore / None / None
+Items: None / Full Restore / None / None
 
 Drapion @Razor Claw
 Level: 40
@@ -14404,8 +14404,7 @@ Ability: Sniper
 Shiny: Yes
 Ball: Dusk
 Nature: Jolly
-Tera Type: Steel
-- Protect
-- Protect
-- Protect
-- Protect
+- Swords Dance
+- Acupressure
+- Focus Energy
+- Slack Off

@@ -2005,6 +2005,10 @@
 	callnative BS_ShowSabotageTrapPopup
 	.endm
 
+	.macro showsabotagetrappopupactive
+	callnative BS_ShowSabotageTrapPopupActive
+	.endm
+
 	.macro waitforbattletextadvance
 	callnative BS_WaitForBattleTextAdvance
 	.endm

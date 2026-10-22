@@ -13,6 +13,9 @@ sText_Name_IntertwinedWill::
 sText_Name_DistortedFury::
     .string "Distorted Fury$"
 
+sText_Name_BallroomBonanza::
+    .string "Ballroom Bonanza$"
+
 
 sText_Name_BloodPact::
     .string "Blood Pact$"
@@ -28,3 +31,6 @@ sText_Name_DetonationDelusion::
 
 sText_Name_NothingSpecial::
     .string "Nothing Special?$"
+
+sText_Name_PandorasBox::
+    .string "Pandora's Box$"

@@ -14337,6 +14337,13 @@ void BS_ShowSabotageTrapPopup(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+void BS_ShowSabotageTrapPopupActive(void)
+{
+    NATIVE_ARGS();
+    CreateSabotageTrapPopUp(GetCurrentActiveTrap(), TRUE);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_WaitForBattleTextAdvance(void)
 {
     NATIVE_ARGS();

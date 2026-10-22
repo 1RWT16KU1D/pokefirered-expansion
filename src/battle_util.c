@@ -362,6 +362,8 @@ static bool32 IsUnnerveAbilityOnOpposingSide(enum BattlerId battler)
 // Functions
 void HandleAction_UseMove(void)
 {
+    bool32 detonationDelusionTriggered = FALSE;
+
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     if (gAbsentBattlerFlags & 1u << gBattlerAttacker
      || gBattleStruct->battlerState[gBattlerAttacker].commandingDondozo
@@ -411,30 +413,71 @@ void HandleAction_UseMove(void)
     }
     else
     {
-        // Add Wrong Intuition Check
-        if (IsSabotageBattle() && (GetCurrentPassiveTrap() == SABOTAGE_TRAP_WRONG_INTUITION))
-        {
-            u8 oldMovePos = gCurrMovePos;
-            u8 movePos;
-            u8 validMovePositions[MAX_MON_MOVES];
-            u8 numValidMoves = 0;
+        enum SabotageTraps passiveTrapId = GetCurrentPassiveTrap();
+        enum SabotageTraps activeTrapId = GetCurrentActiveTrap();
 
-            // Only choose a different move that the battler actually knows
-            for (movePos = 0; movePos < MAX_MON_MOVES; movePos++)
+        // For handling before move chosen effects
+        if (IsSabotageBattle())
+        {
+            switch (passiveTrapId)
             {
-                if (movePos != oldMovePos && gBattleMons[gBattlerAttacker].moves[movePos] != MOVE_NONE)
-                    validMovePositions[numValidMoves++] = movePos;
+                case SABOTAGE_TRAP_WRONG_INTUITION:
+                    u8 oldMovePos = gCurrMovePos;
+                    u8 movePos;
+                    u8 validMovePositions[MAX_MON_MOVES];
+                    u8 numValidMoves = 0;
+
+                    // Only choose a different move that the battler actually knows
+                    for (movePos = 0; movePos < MAX_MON_MOVES; movePos++)
+                    {
+                        if (movePos != oldMovePos && gBattleMons[gBattlerAttacker].moves[movePos] != MOVE_NONE)
+                            validMovePositions[numValidMoves++] = movePos;
+                    }
+
+                    // Get new move target. Otherwise self targetting moves could make you damage yourself
+                    if (numValidMoves != 0)
+                    {
+                        gCurrMovePos = validMovePositions[Random() % numValidMoves];
+                        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gBattleMons[gBattlerAttacker].moves[gCurrMovePos], TARGET_NONE);
+                    }
+
+                default:
+                    break;
             }
 
-            // Get new move target. Otherwise self targetting moves could make you damage yourself
-            if (numValidMoves != 0)
+            switch (activeTrapId)
             {
-                gCurrMovePos = validMovePositions[Random() % numValidMoves];
-                gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gBattleMons[gBattlerAttacker].moves[gCurrMovePos], TARGET_NONE);
+                default:
+                    break;
             }
         }
 
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+
+        // Handle after move chosen effects
+        if (IsSabotageBattle())
+        {
+            switch (passiveTrapId)
+            {
+                default:
+                    break;
+            }
+
+            switch (activeTrapId)
+            {
+                case SABOTAGE_TRAP_DETONATION_DELUSION:
+                    if (!(Random() % 4))
+                    {
+                        detonationDelusionTriggered = TRUE;
+                        gCurrentMove = gChosenMove = MOVE_EXPLOSION;
+                        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(MOVE_EXPLOSION, TARGET_FOES_AND_ALLY);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     if (IsBattlerAlive(gBattlerAttacker))
@@ -491,6 +534,10 @@ void HandleAction_UseMove(void)
     {
         gBattlescriptCurrInstr = GetMoveBattleScript(gCurrentMove);
     }
+
+    // Run the trap popup as a subscript so it returns to and continues the move script
+    if (detonationDelusionTriggered)
+        BattleScriptCall(BattleScript_SabotageTrapTriggered);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
