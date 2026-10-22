@@ -11,6 +11,9 @@
 *.exe
 *.fwjpnfont
 *.gba
+*.ss1
+*.ss2
+*.ss3
 !data/*.gba
 *.sgm
 *.sa1
@@ -92,6 +95,3 @@ tools/compresSmol/compresSmolTilemap
 *.fastSmol
 *.smolTM
 __pycache__
-*.ss1
-*.ss2
-*.ss3

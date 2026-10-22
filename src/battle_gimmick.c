@@ -62,6 +62,16 @@ enum Gimmick GetActiveGimmick(enum BattlerId battler)
     return gBattleStruct->gimmick.activeGimmick[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]];
 }
 
+bool32 IsMoveChangingGimmickInUse(enum BattlerId battler)
+{
+    enum Gimmick gimmick = GetActiveGimmick(battler);
+
+    if (gimmick == GIMMICK_NONE && (gBattleStruct->gimmick.toActivate & (1u << battler)))
+        gimmick = gBattleStruct->gimmick.usableGimmick[battler];
+
+    return gimmick == GIMMICK_Z_MOVE || gimmick == GIMMICK_DYNAMAX;
+}
+
 // Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {

@@ -4822,6 +4822,8 @@ s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability)
     gProtectStructs[battler].pranksterElevated = FALSE;
     if (gProtectStructs[battler].noValidMoves)
         move = MOVE_STRUGGLE;
+    else if (gBattleStruct->sabotage.intertwinedWillSwapped[battler])
+        move = gBattleStruct->sabotage.intertwinedWillMove[battler];
     else
         move = GetBattlerChosenMove(battler);
 
@@ -4999,10 +5001,65 @@ s32 GetWhichBattlerFaster(struct BattleCalcValues *calcValues, bool32 ignoreChos
     return strikesFirst;
 }
 
+static void ResolveIntertwinedWillMoves(void)
+{
+    enum BattlerId battler;
+
+    for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+        gBattleStruct->sabotage.intertwinedWillSwapped[battler] = FALSE;
+
+    if (!IsSabotageBattle() || GetCurrentPassiveTrap() != SABOTAGE_TRAP_INTERTWINED_WILL)
+        return;
+
+    // Pair each active battler with the opposing battler in the same flank.
+    // One 50% roll exchanges both selected moves, so the pair cannot swap twice.
+    for (battler = 0; battler < gBattlersCount; battler++)
+    {
+        enum BattlerId opponent = BATTLE_OPPOSITE(battler);
+        enum Move battlerMove;
+        enum Move opponentMove;
+
+        if (battler > opponent
+         || !IsBattlerAlive(battler)
+         || !IsBattlerAlive(opponent)
+         || gChosenActionByBattler[battler] != B_ACTION_USE_MOVE
+         || gChosenActionByBattler[opponent] != B_ACTION_USE_MOVE
+         || gProtectStructs[battler].noValidMoves
+         || gProtectStructs[opponent].noValidMoves
+         || gBattleMons[battler].volatiles.multipleTurns
+         || gBattleMons[opponent].volatiles.multipleTurns
+         || gBattleMons[battler].volatiles.rechargeTimer
+         || gBattleMons[opponent].volatiles.rechargeTimer
+         || gBattleMons[battler].volatiles.encoredMove != MOVE_NONE
+         || gBattleMons[opponent].volatiles.encoredMove != MOVE_NONE
+         || IsMoveChangingGimmickInUse(battler)
+         || IsMoveChangingGimmickInUse(opponent)
+         || Random() % 2 != 0)
+            continue;
+
+        battlerMove = gChosenMoveByBattler[battler];
+        opponentMove = gChosenMoveByBattler[opponent];
+
+        // Do not exchange Struggle or moves being replaced by a move-changing gimmick.
+        if (battlerMove == MOVE_STRUGGLE || opponentMove == MOVE_STRUGGLE)
+            continue;
+
+        gBattleStruct->sabotage.intertwinedWillMove[battler] = opponentMove;
+        gBattleStruct->sabotage.intertwinedWillMove[opponent] = battlerMove;
+        gBattleStruct->sabotage.intertwinedWillSwapped[battler] = TRUE;
+        gBattleStruct->sabotage.intertwinedWillSwapped[opponent] = TRUE;
+        gChosenMoveByBattler[battler] = opponentMove;
+        gChosenMoveByBattler[opponent] = battlerMove;
+
+    }
+}
+
 static void SetActionsAndBattlersTurnOrder(void)
 {
     s32 turnOrderId = 0;
     enum BattlerId battler, battler2;
+
+    ResolveIntertwinedWillMoves();
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
     {

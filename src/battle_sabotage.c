@@ -32,7 +32,7 @@ const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
 u8 GetRandomTrap(bool8 isActive)
 {
     u8 start = isActive ? SABOTAGE_TRAP_BLOOD_PACT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
-    u8 end = isActive ? SABOTAGE_TRAP_SHATTERED_DREAMS + 1 : SABOTAGE_TRAP_WRONG_INTUITION + 1; // For Debugging
+    u8 end = isActive ? SABOTAGE_TRAP_SHATTERED_DREAMS + 1 : SABOTAGE_TRAP_INTERTWINED_WILL + 1; // For Debugging
 
     u8 trapId;
 

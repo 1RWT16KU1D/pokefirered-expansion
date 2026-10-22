@@ -406,7 +406,8 @@ void HandleAction_UseMove(void)
         gBattleMons[gBattlerAttacker].volatiles.encoreTimer = 0;
         gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gCurrentMove, TARGET_NONE);
     }
-    else if (gBattleMons[gBattlerAttacker].moves[gCurrMovePos] != gChosenMoveByBattler[gBattlerAttacker])
+    else if (gBattleMons[gBattlerAttacker].moves[gCurrMovePos] != gChosenMoveByBattler[gBattlerAttacker]
+          && !gBattleStruct->sabotage.intertwinedWillSwapped[gBattlerAttacker])
     {
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
         gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gCurrentMove, TARGET_NONE);
@@ -422,23 +423,30 @@ void HandleAction_UseMove(void)
             switch (passiveTrapId)
             {
                 case SABOTAGE_TRAP_WRONG_INTUITION:
+                    if (IsMoveChangingGimmickInUse(gBattlerAttacker))
+                        break;
+
                     u8 oldMovePos = gCurrMovePos;
                     u8 movePos;
                     u8 validMovePositions[MAX_MON_MOVES];
                     u8 numValidMoves = 0;
+                    u32 unusableMoves = CheckMoveLimitations(gBattlerAttacker, 0, MOVE_LIMITATIONS_ALL);
 
-                    // Only choose a different move that the battler actually knows
+                    // Only choose a different move that the battler can legally use.
                     for (movePos = 0; movePos < MAX_MON_MOVES; movePos++)
                     {
-                        if (movePos != oldMovePos && gBattleMons[gBattlerAttacker].moves[movePos] != MOVE_NONE)
+                        if (movePos != oldMovePos && !(unusableMoves & (1u << movePos)))
                             validMovePositions[numValidMoves++] = movePos;
                     }
 
-                    // Get new move target. Otherwise self targetting moves could make you damage yourself
                     if (numValidMoves != 0)
                     {
                         gCurrMovePos = validMovePositions[Random() % numValidMoves];
-                        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gBattleMons[gBattlerAttacker].moves[gCurrMovePos], TARGET_NONE);
+                        gChosenMovePos = gBattleStruct->chosenMovePositions[gBattlerAttacker] = gCurrMovePos;
+                        gChosenMoveByBattler[gBattlerAttacker] = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+                        if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_DYNAMAX)
+                            gBattleStruct->dynamax.baseMoves[gBattlerAttacker] = gChosenMoveByBattler[gBattlerAttacker];
+                        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gChosenMoveByBattler[gBattlerAttacker], TARGET_NONE);
                     }
 
                 default:
@@ -452,7 +460,16 @@ void HandleAction_UseMove(void)
             }
         }
 
-        gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+        if (gBattleStruct->sabotage.intertwinedWillSwapped[gBattlerAttacker])
+        {
+            // Keep the battler's own chosen move slot for PP deduction, but use the opposing battler's move effect and recalculate its target
+            gCurrentMove = gChosenMove = gBattleStruct->sabotage.intertwinedWillMove[gBattlerAttacker];
+            gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gCurrentMove, TARGET_NONE);
+        }
+        else
+        {
+            gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+        }
 
         // Handle after move chosen effects
         if (IsSabotageBattle())
