@@ -42,7 +42,7 @@ u8 GetRandomTrap(bool8 isActive)
 
     // For debugging
     if (isActive)
-        return SABOTAGE_TRAP_DETONATION_DELUSION;
+        return Random() % 2 ? SABOTAGE_TRAP_BLOOD_PACT : SABOTAGE_TRAP_DETONATION_DELUSION;
 
     return trapId;
 }

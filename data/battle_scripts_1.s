@@ -32,7 +32,20 @@ BattleScript_SabotageTrapActivation::
 
 BattleScript_SabotageTrapTriggered::
 	showsabotagetrappopupactive
-	pause B_WAIT_TIME_LONG
+	pause B_WAIT_TIME_VERY_LONG
+	return
+
+BattleScript_BloodPactActivates::
+	pause B_WAIT_TIME_SHORT
+	showsabotagetrappopupactive
+	pause B_WAIT_TIME_VERY_LONG
+
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	printstring STRINGID_BLOODPACTACTIVATES
+	waitmessage B_WAIT_TIME_LONG
+
+	tryfaintmon BS_ATTACKER
 	return
 
 BattleScript_TrainerTowerLost::

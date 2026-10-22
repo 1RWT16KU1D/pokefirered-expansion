@@ -4331,6 +4331,27 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         default:
             break;
         }
+
+        // Sabotage Handler
+        if (IsSabotageBattle())
+        {
+            switch (GetCurrentActiveTrap())
+            {
+                case SABOTAGE_TRAP_BLOOD_PACT:
+                    if (!IsBattlerUnaffectedByMove(gBattlerTarget)
+                    && !IsBattlerAlive(gBattlerTarget)
+                    && IsBattlerAlive(gBattlerAttacker))
+                    {
+                        SetPassiveDamageAmount(gBattlerAttacker, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
+                        BattleScriptCall(BattleScript_BloodPactActivates);
+                    }
+                    effect++;
+                    break;
+
+                default:
+                    break;
+            }
+        }
         break;
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
         switch (gLastUsedAbility)

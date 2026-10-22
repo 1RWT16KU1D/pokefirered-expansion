@@ -1,9 +1,12 @@
 #ifndef GUARD_BATTLE_SCRIPTS_H
 #define GUARD_BATTLE_SCRIPTS_H
 
-extern const u8 BattleScript_SupersweetSyrupActivates[];
+// Sabotage Battles
 extern const u8 BattleScript_SabotageTrapActivation[];
 extern const u8 BattleScript_SabotageTrapTriggered[];
+extern const u8 BattleScript_BloodPactActivates[];
+
+extern const u8 BattleScript_SupersweetSyrupActivates[];
 extern const u8 BattleScript_OpportunistCopyStatChange[];
 extern const u8 BattleScript_MirrorHerbCopyStatChange[];
 extern const u8 BattleScript_MirrorHerbCopyStatChangeEnd2[];

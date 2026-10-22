@@ -980,6 +980,9 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_INTERTWINEDWILLACTIVATES]    = COMPOUND_STRING("Pokémon may or may not switch\nmoves with their opponent!"),
     [STRINGID_DISTORTEDFURYACTIVATES]      = COMPOUND_STRING("All Physical and Special moves\nhave switched categories!"),
     [STRINGID_BALLROOMBONANZAACTIVATES]    = COMPOUND_STRING("Pokémon may or may not\nuse a Dancing move instead!"),
+
+    // Sabotage Trap Trigger Strings
+    [STRINGID_BLOODPACTACTIVATES]          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} fulfilled its pact!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
