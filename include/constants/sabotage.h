@@ -43,6 +43,7 @@ enum SabotageTraps
     SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended
     SABOTAGE_TRAP_INTERTWINED_WILL,  // 50% chance to switch moves with opponent
     SABOTAGE_TRAP_DISTORTED_FURY, // Physical moves become Special and vice-versa
+    SABOTAGE_TRAP_BALLROOM_BONANZA, // Pokémon have a 33% chance to use a random Dancing move instead
 
     SABOTAGE_TRAP_PASSIVE_COUNT,
 
@@ -50,10 +51,11 @@ enum SabotageTraps
     SABOTAGE_TRAP_BLOOD_PACT = SABOTAGE_TRAP_PASSIVE_COUNT, // KOing an opponent loses you half your Max HP
     SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera or item use fail and turn ends
     SABOTAGE_TRAP_JACKPOT, // 75% chance to guarantee a critical hit
-    SABOTAGE_TRAP_DETONATION_DELUSION, // 33% chance for any move to become Explosion
+    SABOTAGE_TRAP_DETONATION_DELUSION, // 25% chance for any move to become Explosion
     SABOTAGE_TRAP_NOTHING_SPECIAL, // Normal-type moves become a random type
+    SABOTAGE_TRAP_PANDORAS_BOX, // On using a newly chosen move after switchin, a random weather, terrain and field condition is set
 
-    SABOTAGE_TRAP_TOTAL_COUNT = (SABOTAGE_TRAP_NOTHING_SPECIAL + 1)
+    SABOTAGE_TRAP_TOTAL_COUNT = (SABOTAGE_TRAP_PANDORAS_BOX + 1)
 };
 
 #define SABOTAGE_TRAP_ACTIVE_COUNT (SABOTAGE_TRAP_TOTAL_COUNT - SABOTAGE_TRAP_PASSIVE_COUNT)

@@ -24,7 +24,7 @@
 
 BattleScript_SabotageTrapActivation::
 	showsabotagetrappopup
-	pause B_WAIT_TIME_SHORT
+	pause B_WAIT_TIME_LONG
 	printfromtable gSabotageTrapActivationIds
 	waitforbattletextadvance
 	end2

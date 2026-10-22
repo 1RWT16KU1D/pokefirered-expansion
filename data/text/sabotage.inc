@@ -13,6 +13,7 @@ sText_Name_IntertwinedWill::
 sText_Name_DistortedFury::
     .string "Distorted Fury$"
 
+
 sText_Name_BloodPact::
     .string "Blood Pact$"
 
