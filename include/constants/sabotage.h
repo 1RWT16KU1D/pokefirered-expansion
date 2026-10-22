@@ -50,7 +50,7 @@ enum SabotageTraps
     // Active Traps
     SABOTAGE_TRAP_BLOOD_PACT = SABOTAGE_TRAP_PASSIVE_COUNT, // KOing an opponent loses you half your Max HP. DONE.
     SABOTAGE_TRAP_DETONATION_DELUSION, // 25% chance for any move to become Explosion. DONE.
-    SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera or item use fail and turn ends
+    SABOTAGE_TRAP_SHATTERED_DREAMS, // Mega/Z/Dyna/Tera or item use fail and turn ends. DONE.
     SABOTAGE_TRAP_JACKPOT, // Using a super-effective move results in a crit
     SABOTAGE_TRAP_NOTHING_SPECIAL, // Normal-type moves become a random type
     SABOTAGE_TRAP_PANDORAS_BOX, // On using a newly chosen move after switchin, a random weather, terrain and field condition is set
