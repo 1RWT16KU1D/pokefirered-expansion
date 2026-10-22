@@ -14396,15 +14396,68 @@ Double Battle: No
 AI: Check Bad Move / Try To Faint / Check Viability
 Items: None / Full Restore / None / None
 
-Hydreigon @Razor Claw
-Level: 40
-IVs: 31 HP / 31 Atk / 31 Def / 0 SpA / 31 SpD / 31 Spe
-EVs: 128 HP / 252 Atk / 128 Spe
-Ability: Levitate
-Shiny: Yes
-Ball: Dusk
-Nature: Jolly
-- Swords Dance
-- Acupressure
-- Focus Energy
+Hippowdon @Leftovers
+Level: 50
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 4 Atk / 252 Def
+Ability: Sand Stream
+Nature: Impish
+- Earthquake
+- Stealth Rock
 - Slack Off
+- Whirlwind
+
+Toxapex @Black Sludge
+Level: 50
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 4 Def / 252 SpD
+Ability: Regenerator
+Nature: Calm
+- Scald
+- Recover
+- Toxic
+- Haze
+
+Corviknight @Rocky Helmet
+Level: 50
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 4 Atk / 252 Def
+Ability: Pressure
+Nature: Impish
+- Brave Bird
+- Roost
+- Body Press
+- U-turn
+
+Gholdengo @Leftovers
+Level: 50
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Ability: Good as Gold
+Nature: Timid
+- Make It Rain
+- Shadow Ball
+- Recover
+- Nasty Plot
+
+Volcarona @Heavy-Duty Boots
+Level: 50
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 SpA / 252 Spe
+Ability: Flame Body
+Nature: Timid
+- Flamethrower
+- Giga Drain
+- Quiver Dance
+- Roost
+
+Dragapult @Sitrus Berry
+Level: 50
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 252 Spe
+Ability: Infiltrator
+Nature: Jolly
+- Dragon Darts
+- U-turn
+- Will-O-Wisp
+- Dragon Dance

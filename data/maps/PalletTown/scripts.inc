@@ -451,12 +451,17 @@ PalletTown_EventScript_SignLadyStartShowSign::
 PalletTown_EventScript_BrunoGreet::
 	lock
 	faceplayer
-	giveitem ITEM_MEGA_RING 1
+	additem ITEM_MEGA_RING 1
 	setflag FLAG_BADGE08_GET
-	givemon SPECIES_SALAMENCE 50 ITEM_SALAMENCITE
-	givemon SPECIES_GYARADOS 50 ITEM_GYARADOSITE
+	@ Durable test team with recovery, status, setup, and varied move types/targets.
+	givemon SPECIES_SALAMENCE, 50, ITEM_SALAMENCITE, , NATURE_JOLLY, , , , , , , , , , , , , , , MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_DRAGON_DANCE, MOVE_ROOST
+	givemon SPECIES_GYARADOS, 50, ITEM_SITRUS_BERRY, , NATURE_IMPISH, , , , , , , , , , , , , , , MOVE_WATERFALL, MOVE_CRUNCH, MOVE_DRAGON_DANCE, MOVE_REST
+	givemon SPECIES_BLISSEY, 50, ITEM_LEFTOVERS, , NATURE_BOLD, , , , , , , , , , , , , , , MOVE_SOFT_BOILED, MOVE_TOXIC, MOVE_SEISMIC_TOSS, MOVE_PROTECT
+	givemon SPECIES_FERROTHORN, 50, ITEM_ROCKY_HELMET, , NATURE_IMPISH, , , , , , , , , , , , , , , MOVE_LEECH_SEED, MOVE_PROTECT, MOVE_GYRO_BALL, MOVE_POWER_WHIP
+	givemon SPECIES_MILOTIC, 50, ITEM_LEFTOVERS, , NATURE_BOLD, , , , , , , , , , , , , , , MOVE_SCALD, MOVE_RECOVER, MOVE_ICE_BEAM, MOVE_TOXIC
+	givemon SPECIES_CLODSIRE, 50, ITEM_BLACK_SLUDGE, , NATURE_CAREFUL, , , , , , , , , , , , , , , MOVE_EARTHQUAKE, MOVE_RECOVER, MOVE_TOXIC, MOVE_HAZE
 	setflag B_FLAG_SABOTAGE_BATTLE
-	trainerbattle_single TRAINER_PATTON, PalletTown_Text_BrunoSaysHi, PalletTown_Text_BrunoSaysHi
-	msgbox PalletTown_Text_BrunoSaysHi, MSGBOX_NPC
+	trainerbattle_single TRAINER_PATTON, PalletTown_Text_BrunoSaysHi, PalletTown_Text_BrunoLostBattle
+	msgbox PalletTown_Text_BrunoAfterBattle, MSGBOX_NPC
 	release
 	end

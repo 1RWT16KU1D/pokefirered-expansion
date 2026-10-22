@@ -66,5 +66,11 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "Hohoho.$"
 
 PalletTown_Text_BrunoSaysHi::
-    .string "{COLOR}{DARK_GRAY}Bruno:{COLOR}{BLUE} Hoho! It's good to\n"
-    .string "see you, {PLAYER}!$"
+    .string "{COLOR}{DARK_GRAY}Patton:{COLOR}{BLUE} Hoho! It's good to\n"
+    .string "see you, {PLAYER}! Let's battle!$"
+
+PalletTown_Text_BrunoLostBattle::
+    .string "Did you have fun?$"
+
+PalletTown_Text_BrunoAfterBattle:
+    .string "{COLOR}{DARK_GRAY}Patton:{COLOR}{BLUE} Let's do this again sometime!$"
