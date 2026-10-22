@@ -108,6 +108,7 @@ bool32 TryRunShatteredDreamsScript(enum BattlerId battler)
     gBattlerAttacker = gBattleScripting.battler = battler;
     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHATTERED_DREAMS_ACTIVATES;
     BattleScriptExecute(BattleScript_SabotageTrapActionBlocked);
+    gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
     return TRUE;
 }
 
