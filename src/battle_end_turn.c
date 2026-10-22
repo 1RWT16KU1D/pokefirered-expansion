@@ -1456,7 +1456,12 @@ static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
             gBattleStruct->sabotage.passiveTrapEffectPending = TRUE;
         }
 
-        if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)
+        if (gBattleStruct->sabotage.activeTrapConditionMet)
+        {
+            ResetActiveTrapCounter();
+            SetRandomActiveTrap();
+        }
+        else if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)
         {
             ResetActiveTrapCounter();
             SetRandomActiveTrap();

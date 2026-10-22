@@ -977,8 +977,9 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_TRAPPERSTERRITORYACTIVATES]  = COMPOUND_STRING("Pokémon can no longer escape!"),
     [STRINGID_GRAVEYARDACTIVATES]          = COMPOUND_STRING("All Pokémon gained the\nGhost-type!"),
     [STRINGID_WRONGINTUITIONACTIVATES]     = COMPOUND_STRING("Pokémon will use a different\nmove than intended!"),
-    [STRINGID_INTERTWINEDWILLACTIVATES]      = COMPOUND_STRING("Pokémon may or may not switch\nmoves with their opponent!"),
+    [STRINGID_INTERTWINEDWILLACTIVATES]    = COMPOUND_STRING("Pokémon may or may not switch\nmoves with their opponent!"),
     [STRINGID_DISTORTEDFURYACTIVATES]      = COMPOUND_STRING("All Physical and Special moves\nhave switched categories!"),
+    [STRINGID_BALLROOMBONANZAACTIVATES]    = COMPOUND_STRING("Pokémon may or may not\nuse a Dancing move instead!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1499,7 +1500,8 @@ const u16 gSabotageTrapActivationIds[] =
     [B_MSG_GRAVEYARD_ACTIVATES] = STRINGID_GRAVEYARDACTIVATES,
     [B_MSG_WRONG_INTUITION_ACTIVATES] = STRINGID_WRONGINTUITIONACTIVATES,
     [B_MSG_INTERTWINED_WILL_ACTIVATES] = STRINGID_INTERTWINEDWILLACTIVATES,
-    [B_MSG_DISTORTED_FURY_ACTIVATES] = STRINGID_DISTORTEDFURYACTIVATES
+    [B_MSG_DISTORTED_FURY_ACTIVATES] = STRINGID_DISTORTEDFURYACTIVATES,
+    [B_MSG_BALLROOM_BONANZA_ACTIVATES] = STRINGID_BALLROOMBONANZAACTIVATES,
 };
 
 // Index is determined in VARIOUS_GET_BATTLERS_FOR_RECALL by ORing flags for each present battler on the losing side.

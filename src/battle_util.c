@@ -537,7 +537,10 @@ void HandleAction_UseMove(void)
 
     // Run the trap popup as a subscript so it returns to and continues the move script
     if (detonationDelusionTriggered)
+    {
         BattleScriptCall(BattleScript_SabotageTrapTriggered);
+        gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
+    }
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
