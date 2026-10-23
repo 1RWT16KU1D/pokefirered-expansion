@@ -9291,6 +9291,10 @@ void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef
         gBattleStruct->swapDamageCategory = FALSE;
         break;
     }
+
+    // Distorted Fury as the final swap check
+    if (IsSabotageBattle() && (GetCurrentPassiveTrap() == SABOTAGE_TRAP_DISTORTED_FURY))
+        gBattleStruct->swapDamageCategory = !gBattleStruct->swapDamageCategory;
 }
 
 static bool32 TryRemoveScreens(enum BattlerId battler)

@@ -42,7 +42,7 @@ enum SabotageTraps
     SABOTAGE_TRAP_GRAVEYARD, // All Pokémon gain Ghost-type (can have up to 3 types). DONE.
     SABOTAGE_TRAP_WRONG_INTUITION, // Pokémon will use a different move than intended. DONE.
     SABOTAGE_TRAP_INTERTWINED_WILL,  // 50% chance to switch moves with opponent. DONE.
-    SABOTAGE_TRAP_DISTORTED_FURY, // Physical moves become Special and vice-versa
+    SABOTAGE_TRAP_DISTORTED_FURY, // Physical moves become Special and vice-versa. DONE.
     SABOTAGE_TRAP_BALLROOM_BONANZA, // Pokémon have a 33% chance to use a random Dancing move instead
 
     SABOTAGE_TRAP_PASSIVE_COUNT,

@@ -978,7 +978,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_GRAVEYARDACTIVATES]          = COMPOUND_STRING("All Pokémon gained the\nGhost-type!"),
     [STRINGID_WRONGINTUITIONACTIVATES]     = COMPOUND_STRING("Pokémon will use a different\nmove than intended!"),
     [STRINGID_INTERTWINEDWILLACTIVATES]    = COMPOUND_STRING("Pokémon may or may not switch\nmoves with their opponent!"),
-    [STRINGID_DISTORTEDFURYACTIVATES]      = COMPOUND_STRING("All Physical and Special moves\nhave switched categories!"),
+    [STRINGID_DISTORTEDFURYACTIVATES]      = COMPOUND_STRING("Physical and Special moves\nswitched categories!"),
     [STRINGID_BALLROOMBONANZAACTIVATES]    = COMPOUND_STRING("Pokémon may or may not\nuse a Dancing move instead!"),
 
     // Sabotage Trap Trigger Strings
