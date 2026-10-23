@@ -32,17 +32,13 @@ const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
 u8 GetRandomTrap(bool8 isActive)
 {
     u8 start = isActive ? SABOTAGE_TRAP_BLOOD_PACT : SABOTAGE_TRAP_TRAPPERS_TERRITORY;
-    u8 end = isActive ? SABOTAGE_TRAP_JACKPOT + 1 : SABOTAGE_TRAP_DISTORTED_FURY + 1; // For Debugging
+    u8 end = isActive ? SABOTAGE_TRAP_NOTHING_SPECIAL + 1 : SABOTAGE_TRAP_DISTORTED_FURY + 1; // For Debugging
 
     u8 trapId;
 
     // Prevent getting the same trap twice in a row
     do trapId = start + (Random() % (end - start));
     while (trapId == GetCurrentActiveTrap() || trapId == GetCurrentPassiveTrap());
-
-    // Debug
-    if (!isActive)
-        return SABOTAGE_TRAP_DISTORTED_FURY;
 
     return trapId;
 }

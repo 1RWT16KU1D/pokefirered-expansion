@@ -6191,6 +6191,19 @@ void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler)
      || gBattleMons[battler].volatiles.electrified)
         gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
 
+    if (gMain.inBattle && IsSabotageBattle()
+     && GetCurrentActiveTrap() == SABOTAGE_TRAP_NOTHING_SPECIAL
+     && battler == gBattlerAttacker && move == gCurrentMove
+     && GetBattleMoveType(move) == TYPE_NORMAL)
+    {
+        do
+            gBattleStruct->sabotage.nothingSpecialType = Random() % NUMBER_OF_MON_TYPES;
+        while (gBattleStruct->sabotage.nothingSpecialType == TYPE_NORMAL
+            || gBattleStruct->sabotage.nothingSpecialType == TYPE_MYSTERY
+            || gBattleStruct->sabotage.nothingSpecialType == TYPE_STELLAR);
+        gBattleStruct->dynamicMoveType = gBattleStruct->sabotage.nothingSpecialType | F_DYNAMIC_TYPE_SET;
+    }
+
     // Check if a gem should activate.
     u32 effect = GetMoveEffect(move);
     if (holdEffect == HOLD_EFFECT_GEMS

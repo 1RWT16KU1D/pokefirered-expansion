@@ -602,6 +602,20 @@ void HandleAction_UseMove(void)
      && IsJackpotMoveSuperEffective(gBattlerAttacker, gCurrentMove, gBattlerTarget))
         BattleScriptCall(BattleScript_SabotageTrapTriggered);
 
+    // Nothing Special? text
+    if (IsSabotageBattle()
+     && GetCurrentActiveTrap() == SABOTAGE_TRAP_NOTHING_SPECIAL
+     && gBattleStruct->dynamicMoveType != 0
+     && (gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK) == gBattleStruct->sabotage.nothingSpecialType
+     && (gBattleStruct->sabotage.nothingSpecialType != TYPE_NONE))
+    {
+        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gCurrentMove);
+        PREPARE_TYPE_BUFFER(gBattleTextBuff2, gBattleStruct->sabotage.nothingSpecialType);
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NOTHING_SPECIAL_TRIGGERS;
+        BattleScriptCall(BattleScript_SabotageTrapTriggeredShowTriggerText);
+        gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
+    }
+
     // Run the trap popup as a subscript so it returns to and continues the move script
     if (detonationDelusionTriggered)
     {

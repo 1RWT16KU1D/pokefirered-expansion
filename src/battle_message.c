@@ -984,6 +984,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     // Sabotage Trap Trigger Strings
     [STRINGID_BLOODPACTACTIVATES]          = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} fulfilled its pact!"),
     [STRINGID_SHATTEREDDREAMSACTIVATES]    = COMPOUND_STRING("{B_ATK_TRAINER_NAME}'s hopes were crushed!"),
+    [STRINGID_NOTHINGSPECIALTRIGGERS]      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} changed to {B_BUFF2}-type!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1512,6 +1513,7 @@ const u16 gSabotageTrapTriggerIds[] =
 {
     [B_MSG_BLOOD_PACT_ACTIVATES] = STRINGID_BLOODPACTACTIVATES,
     [B_MSG_SHATTERED_DREAMS_ACTIVATES] = STRINGID_SHATTEREDDREAMSACTIVATES,
+    [B_MSG_NOTHING_SPECIAL_TRIGGERS] = STRINGID_NOTHINGSPECIALTRIGGERS,
 };
 
 // Index is determined in VARIOUS_GET_BATTLERS_FOR_RECALL by ORing flags for each present battler on the losing side.
