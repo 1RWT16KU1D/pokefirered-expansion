@@ -359,6 +359,49 @@ static bool32 IsUnnerveAbilityOnOpposingSide(enum BattlerId battler)
     return FALSE;
 }
 
+static bool32 IsJackpotMoveSuperEffective(enum BattlerId battlerAtk, enum Move move, enum BattlerId selectedTarget)
+{
+    enum MoveTarget moveTarget = GetBattlerMoveTargetType(battlerAtk, move);
+    enum BattlerId battlerDef;
+
+    for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
+    {
+        struct BattleContext ctx = {0};
+
+        if (!IsBattlerAlive(battlerDef))
+            continue;
+
+        if (moveTarget == TARGET_BOTH)
+        {
+            if (IsBattlerAlly(battlerAtk, battlerDef))
+                continue;
+        }
+        else if (moveTarget == TARGET_FOES_AND_ALLY)
+        {
+            if (battlerAtk == battlerDef)
+                continue;
+        }
+        else if (moveTarget != TARGET_ALL_BATTLERS && battlerDef != selectedTarget)
+        {
+            continue;
+        }
+
+        ctx.battlerAtk = battlerAtk;
+        ctx.battlerDef = battlerDef;
+        ctx.move = ctx.chosenMove = move;
+        ctx.moveType = GetBattleMoveType(move);
+        ctx.abilityAtk = GetBattlerAbility(battlerAtk);
+        ctx.abilityDef = GetBattlerAbility(battlerDef);
+        ctx.holdEffectAtk = GetBattlerHoldEffect(battlerAtk);
+        ctx.holdEffectDef = GetBattlerHoldEffect(battlerDef);
+
+        if (CalcTypeEffectivenessMultiplier(&ctx) >= UQ_4_12(2.0))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 // Functions
 void HandleAction_UseMove(void)
 {
@@ -552,16 +595,19 @@ void HandleAction_UseMove(void)
         gBattlescriptCurrInstr = GetMoveBattleScript(gCurrentMove);
     }
 
+    // For Jackpot SE calculation
+    if (IsSabotageBattle()
+     && GetCurrentActiveTrap() == SABOTAGE_TRAP_JACKPOT
+     && !gBattleStruct->sabotage.activeTrapConditionMet
+     && IsJackpotMoveSuperEffective(gBattlerAttacker, gCurrentMove, gBattlerTarget))
+        BattleScriptCall(BattleScript_SabotageTrapTriggered);
+
     // Run the trap popup as a subscript so it returns to and continues the move script
     if (detonationDelusionTriggered)
     {
         BattleScriptCall(BattleScript_SabotageTrapTriggered);
         gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
     }
-
-    // Run for Jackpot
-    if (gBattleStruct->sabotage.activeTrapConditionMet && (GetCurrentActiveTrap() == SABOTAGE_TRAP_JACKPOT))
-        BattleScriptCall(BattleScript_SabotageTrapTriggered);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);

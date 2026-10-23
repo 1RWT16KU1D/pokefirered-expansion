@@ -40,10 +40,6 @@ u8 GetRandomTrap(bool8 isActive)
     do trapId = start + (Random() % (end - start));
     while (trapId == GetCurrentActiveTrap() || trapId == GetCurrentPassiveTrap());
 
-    // Debug
-    if (isActive)
-        return SABOTAGE_TRAP_JACKPOT;
-
     return trapId;
 }
 

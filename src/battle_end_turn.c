@@ -1460,6 +1460,7 @@ static bool32 HandleEndTurnSabotageBattleEffects(enum BattlerId battler)
         {
             ResetActiveTrapCounter();
             SetRandomActiveTrap();
+            gBattleStruct->sabotage.activeTrapConditionMet = FALSE;
         }
         else if (gBattleStruct->sabotage.activeTrapCtr > 0 && --gBattleStruct->sabotage.activeTrapCtr == 0)
         {
