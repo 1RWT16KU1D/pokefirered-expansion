@@ -559,6 +559,10 @@ void HandleAction_UseMove(void)
         gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
     }
 
+    // Run for Jackpot
+    if (gBattleStruct->sabotage.activeTrapConditionMet && (GetCurrentActiveTrap() == SABOTAGE_TRAP_JACKPOT))
+        BattleScriptCall(BattleScript_SabotageTrapTriggered);
+
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
 
@@ -8071,6 +8075,12 @@ s32 CalcCritChanceStage(struct BattleContext *ctx)
           || (ctx->abilityAtk == ABILITY_MERCILESS && gBattleMons[ctx->battlerDef].status1 & STATUS1_PSN_ANY))
     {
         critChance = CRITICAL_HIT_ALWAYS;
+    }
+    else if (IsSabotageBattle() && (GetCurrentActiveTrap() == SABOTAGE_TRAP_JACKPOT)
+        && (ctx->typeEffectivenessModifier >= UQ_4_12(2.0)))
+    {
+        critChance = CRITICAL_HIT_ALWAYS;
+        gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
     }
     else
     {
