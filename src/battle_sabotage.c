@@ -13,7 +13,7 @@
 // Flavor Text Tables
 const u8 *const sSabotageTraps_NameTable[SABOTAGE_TRAP_TOTAL_COUNT] =
 {
-    0,
+    NULL,
     sText_Name_TrappersTerritory,
     sText_Name_Graveyard,
     sText_Name_WrongIntuition,
@@ -39,6 +39,9 @@ u8 GetRandomTrap(bool8 isActive)
     // Prevent getting the same trap twice in a row
     do trapId = start + (Random() % (end - start));
     while (trapId == GetCurrentActiveTrap() || trapId == GetCurrentPassiveTrap());
+
+    if (isActive)
+        return SABOTAGE_TRAP_PANDORAS_BOX;
 
     return trapId;
 }

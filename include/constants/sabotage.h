@@ -55,7 +55,7 @@ enum SabotageTraps
     SABOTAGE_TRAP_NOTHING_SPECIAL, // Normal-type moves become a random type. DONE.
     SABOTAGE_TRAP_PANDORAS_BOX, // On using a newly chosen move after switchin, a random weather, terrain and field condition is set
 
-    SABOTAGE_TRAP_TOTAL_COUNT = (SABOTAGE_TRAP_PANDORAS_BOX + 1)
+    SABOTAGE_TRAP_TOTAL_COUNT
 };
 
 #define SABOTAGE_TRAP_ACTIVE_COUNT (SABOTAGE_TRAP_TOTAL_COUNT - SABOTAGE_TRAP_PASSIVE_COUNT)
@@ -66,8 +66,6 @@ struct TrapData
     u8 *name;
     u8 *desc;
 };
-
-extern struct TrapData gTrapData[SABOTAGE_TRAP_TOTAL_COUNT];
 
 // Flavor Text
 extern u8 sText_Name_TrappersTerritory[];

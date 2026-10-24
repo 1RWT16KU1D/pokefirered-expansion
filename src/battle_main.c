@@ -5422,6 +5422,7 @@ static void CheckChangingTurnOrderEffects(void)
     gCurrentTurnActionNumber = 0;
     gCurrentActionFuncId = gActionsByTurnOrder[0];
     gBattleStruct->dynamicMoveType = 0;
+
     gBattleStruct->effectsBeforeUsingMoveDone = FALSE;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {

@@ -564,6 +564,9 @@ void HandleAction_UseMove(void)
         }
     }
 
+    // Track movePos for Pandora's Box
+    gBattleMons[gBattlerAttacker].moveUsed[gCurrMovePos] = TRUE;
+
     if (IsBattlerAlive(gBattlerAttacker))
     {
         if (IsOnPlayerSide(gBattlerAttacker))
@@ -4451,6 +4454,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     && !IsBattlerAlive(gBattlerTarget)
                     && IsBattlerAlive(gBattlerAttacker))
                     {
+                        gBattleStruct->sabotage.activeTrapConditionMet = TRUE;
                         SetPassiveDamageAmount(gBattlerAttacker, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
                         gBattleCommunication[MULTISTRING_CHOOSER] = activeTrapId - SABOTAGE_TRAP_BLOOD_PACT; 
                         BattleScriptCall(BattleScript_BloodPactActivates);
