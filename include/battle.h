@@ -461,6 +461,7 @@ struct SabotageData
     u8 nothingSpecialType;
     u8 intertwinedWillSwapped[MAX_BATTLERS_COUNT]; // TRUE for battlers whose move was exchanged this turn
     u16 intertwinedWillMove[MAX_BATTLERS_COUNT]; // Stores moves to be swapped during Intertwined Will
+    bool8 doBallroomBonanza[3]; // Initialise for 3 turns
 };
 
 struct BattleGimmickData

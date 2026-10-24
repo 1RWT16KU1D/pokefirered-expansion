@@ -14392,9 +14392,9 @@ Class: Developer
 Pic: Pyramid King Brandon
 Gender: Male
 Music: Male
-Double Battle: No
+Double Battle: Yes
 AI: Check Bad Move / Try To Faint / Check Viability
-Items: None / Full Restore / None / None
+Items: Full Restore / Full Restore / None / None
 
 Hippowdon @Leftovers
 Level: 50

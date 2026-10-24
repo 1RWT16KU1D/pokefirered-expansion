@@ -24,3 +24,6 @@ u8 GetCurrentPassiveTrap(void); // Returns the current passive trap ID
 void CreateSabotageTrapPopUp(enum SabotageTraps trapId, bool8 isActiveTrap);
 bool32 TryRunSabotageTrapActivationScript(enum SabotageTraps trapId);
 bool32 TryRunShatteredDreamsScript(enum BattlerId battler);
+
+// For Ballroom Bonanza
+#define NUM_DANCING_MOVES 12

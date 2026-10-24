@@ -61,6 +61,22 @@ enum SafariAction
     SAFARI_ACTION_THROW_BAIT,
 };
 
+// List of Dancing Moves
+static const enum Move sDancingMoves[NUM_DANCING_MOVES] = {
+    MOVE_SWORDS_DANCE,
+    MOVE_PETAL_DANCE,
+    MOVE_FEATHER_DANCE,
+    MOVE_TEETER_DANCE,
+    MOVE_DRAGON_DANCE,
+    MOVE_LUNAR_DANCE,
+    MOVE_QUIVER_DANCE,
+    MOVE_FIERY_DANCE,
+    MOVE_REVELATION_DANCE,
+    MOVE_CLANGOROUS_SOUL,
+    MOVE_VICTORY_DANCE,
+    MOVE_AQUA_STEP
+};
+
 static bool32 TryRemoveScreens(enum BattlerId battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(enum BattlerId battler);
 static u32 GetFlingPowerFromItemId(enum Item itemId);
@@ -519,6 +535,14 @@ void HandleAction_UseMove(void)
         {
             switch (passiveTrapId)
             {
+                case SABOTAGE_TRAP_BALLROOM_BONANZA:
+                    if (gBattleStruct->sabotage.doBallroomBonanza[3 - gBattleStruct->sabotage.passiveTrapCtr])
+                    {
+                        gCurrentMove = gChosenMove = sDancingMoves[Random() % NUM_DANCING_MOVES];
+                        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gChosenMove, TARGET_NONE);
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -5065,6 +5089,11 @@ bool32 SabotageBattleEffects(enum SabotageEffects caseId, u32 battler, enum Sabo
                         gBattleMons[battler].types[2] = TYPE_GHOST;
 
                     effect = TRUE;
+                    break;
+
+                case SABOTAGE_TRAP_BALLROOM_BONANZA:
+                    for (u32 i = 0; i < 3; i++)
+                        gBattleStruct->sabotage.doBallroomBonanza[i] = !(Random() % 3);
                     break;
 
                 default:
